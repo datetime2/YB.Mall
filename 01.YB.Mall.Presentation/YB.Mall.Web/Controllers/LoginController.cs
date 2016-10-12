@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using YB.Mall.Extend;
 using YB.Mall.Service;
 
 namespace YB.Mall.Web.Controllers
@@ -18,6 +19,16 @@ namespace YB.Mall.Web.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+        [HttpPost]
+        public JsonResult ManageLogin(string loginname,string password,string code)
+        {
+            return Json(null);
+        }
+        [HttpGet]
+        public ActionResult GetAuthCode()
+        {
+            return File(new VerifyCode().GetVerifyCode(), @"image/Gif");
         }
     }
 }

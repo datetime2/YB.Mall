@@ -444,6 +444,10 @@
       <Project>{05c49278-e126-4348-b04e-4bf4a8eef213}</Project>
       <Name>YB.Mall.Service</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\05.YB.Mall.Extend\YB.Mall.Extend\YB.Mall.Extend.csproj">
+      <Project>{a0c3c519-2ddc-4208-9ccd-918fbf9cecdd}</Project>
+      <Name>YB.Mall.Extend</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

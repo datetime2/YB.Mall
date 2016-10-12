@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YB.Mall.Extend
+namespace FT.Utility.UEditor
 {
-    public class Class1
+    public interface IUEditorHandle
     {
+        object Process();
     }
 }

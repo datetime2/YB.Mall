@@ -112,7 +112,7 @@
                         $(".container").css("margin-top", ($(window).height() - $(".container").height()) / 2 - 50);
                     });
                     $("#switchCode").click(function () {
-                        $("#imgcode").attr("src", "/Login/GetAuthCode?time=" + Math.random());
+                        $("#imgcode").attr("src", "/Login/AuthCode?time=" + Math.random());
                     });
                     var login_error = top.$.cookie('nfine_login_error');
                     if (login_error != null) {
