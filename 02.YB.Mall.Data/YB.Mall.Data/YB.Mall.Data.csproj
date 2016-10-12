@@ -73,6 +73,18 @@
     <Compile Include="Migrations\201610110925222_editBrand.Designer.cs">
       <DependentUpon>201610110925222_editBrand.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610120144231_editship.cs" />
+    <Compile Include="Migrations\201610120144231_editship.Designer.cs">
+      <DependentUpon>201610120144231_editship.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610120200064_ShipAddress_string.cs" />
+    <Compile Include="Migrations\201610120200064_ShipAddress_string.Designer.cs">
+      <DependentUpon>201610120200064_ShipAddress_string.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610120204124_ShipAddress_MaxLength.cs" />
+    <Compile Include="Migrations\201610120204124_ShipAddress_MaxLength.Designer.cs">
+      <DependentUpon>201610120204124_ShipAddress_MaxLength.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepository\IBrandRepository.cs" />
@@ -113,6 +125,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610110925222_editBrand.resx">
       <DependentUpon>201610110925222_editBrand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610120144231_editship.resx">
+      <DependentUpon>201610120144231_editship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610120200064_ShipAddress_string.resx">
+      <DependentUpon>201610120200064_ShipAddress_string.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610120204124_ShipAddress_MaxLength.resx">
+      <DependentUpon>201610120204124_ShipAddress_MaxLength.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
