@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Manager\ManageInfo.cs" />
     <Compile Include="Order\OrderInfo.cs" />
     <Compile Include="Order\OrderItemInfo.cs" />
     <Compile Include="Product\BrandInfo.cs" />
