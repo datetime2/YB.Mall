@@ -3,11 +3,11 @@ using YB.Mall.Data.Repositories;
 using YB.Mall.Model;
 namespace YB.Mall.Service
 {
-    public class UserInfoService : IUserInfoService
+    public class UserService : IUserService
     {
-        private IUserInfoRepository repository;
+        private IUserRepository repository;
         private IUnitOfWork unitOfWork;
-        public UserInfoService(IUserInfoRepository repository, IUnitOfWork unitOfWork)
+        public UserService(IUserRepository repository, IUnitOfWork unitOfWork)
         {
             this.repository = repository;
             this.unitOfWork = unitOfWork;

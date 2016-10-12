@@ -3,11 +3,12 @@ using YB.Mall.Model;
 
 namespace YB.Mall.Data.Repositories
 {
-    public class UserInfoRepository : Repository<UserInfo>, IUserRepository
+    public class MenuRepository:Repository<MenuInfo>,IMenuRepository
     {
-        public UserInfoRepository(IDatabaseFactory dbFactory)
+        public MenuRepository(IDatabaseFactory dbFactory)
             : base(dbFactory)
         {
+            
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace YB.Mall.Data.Repositories
 {
-    public interface IUserInfoRepository : IRepository<UserInfo>
+    public interface IMenuRepository:IRepository<MenuInfo>
     {
          
     }

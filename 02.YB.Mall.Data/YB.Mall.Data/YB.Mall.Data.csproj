@@ -112,14 +112,16 @@
     <Compile Include="Repositories\IRepository\IBrandRepository.cs" />
     <Compile Include="Repositories\IRepository\ICategoryRepository.cs" />
     <Compile Include="Repositories\IRepository\IManageRepository.cs" />
+    <Compile Include="Repositories\IRepository\IMenuRepository.cs" />
     <Compile Include="Repositories\IRepository\IOrderItemRepository.cs" />
     <Compile Include="Repositories\IRepository\IOrderRepository.cs" />
     <Compile Include="Repositories\IRepository\IProductRepository.cs" />
     <Compile Include="Repositories\IRepository\IRepository.cs" />
-    <Compile Include="Repositories\IRepository\IUserInfoRepository.cs" />
+    <Compile Include="Repositories\IRepository\IUserRepository.cs" />
     <Compile Include="Repositories\Repository\BrandRepository.cs" />
     <Compile Include="Repositories\Repository\CategoryRepository.cs" />
     <Compile Include="Repositories\Repository\ManageRepository.cs" />
+    <Compile Include="Repositories\Repository\MenuRepository.cs" />
     <Compile Include="Repositories\Repository\OrderItemRepository.cs" />
     <Compile Include="Repositories\Repository\OrderRepository.cs" />
     <Compile Include="Repositories\Repository\ProductRepository.cs" />

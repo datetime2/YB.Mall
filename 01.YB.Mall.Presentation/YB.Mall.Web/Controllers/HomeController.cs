@@ -10,9 +10,9 @@ namespace YB.Mall.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IUserInfoService userService;
+        private readonly IUserService userService;
 
-        public HomeController(IUserInfoService _userService)
+        public HomeController(IUserService _userService)
         {
             userService = _userService;
         }
