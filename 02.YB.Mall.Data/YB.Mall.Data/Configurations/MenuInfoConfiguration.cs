@@ -13,6 +13,14 @@ namespace YB.Mall.Data.Configurations
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(s => s.MenuName).HasMaxLength(50).IsRequired();
             this.Property(s => s.ParentId).IsRequired();
+            this.Property(s => s.Target).IsRequired().HasMaxLength(20);
+            this.Property(s => s.UrlPath).IsRequired().HasMaxLength(80);
+            this.HasMany(s => s.RoleInfo).WithMany(s => s.MenuInfo).Map(rm =>
+            {
+                rm.MapLeftKey("RoleId");
+                rm.MapRightKey("MenuId");
+                rm.ToTable("T_RoleMenuInfo");
+            });
             this.ToTable("T_MenuInfo");
         }
     }

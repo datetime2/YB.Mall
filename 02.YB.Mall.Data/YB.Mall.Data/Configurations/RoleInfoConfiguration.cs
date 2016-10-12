@@ -13,6 +13,8 @@ namespace YB.Mall.Data.Configurations
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             this.Property(s => s.RoleName).HasMaxLength(50).IsRequired();
+
+
             this.ToTable("T_RoleInfo");
         }
     }
