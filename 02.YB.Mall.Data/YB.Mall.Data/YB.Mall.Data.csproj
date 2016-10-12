@@ -63,51 +63,6 @@
     <Compile Include="Infrastructure\IDatabaseFactory.cs" />
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\201610110834370_InitialCreate.cs" />
-    <Compile Include="Migrations\201610110834370_InitialCreate.Designer.cs">
-      <DependentUpon>201610110834370_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610110846112_201610111646.cs" />
-    <Compile Include="Migrations\201610110846112_201610111646.Designer.cs">
-      <DependentUpon>201610110846112_201610111646.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610110923294_AddBrand.cs" />
-    <Compile Include="Migrations\201610110923294_AddBrand.Designer.cs">
-      <DependentUpon>201610110923294_AddBrand.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610110925222_editBrand.cs" />
-    <Compile Include="Migrations\201610110925222_editBrand.Designer.cs">
-      <DependentUpon>201610110925222_editBrand.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610120144231_editship.cs" />
-    <Compile Include="Migrations\201610120144231_editship.Designer.cs">
-      <DependentUpon>201610120144231_editship.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610120200064_ShipAddress_string.cs" />
-    <Compile Include="Migrations\201610120200064_ShipAddress_string.Designer.cs">
-      <DependentUpon>201610120200064_ShipAddress_string.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610120204124_ShipAddress_MaxLength.cs" />
-    <Compile Include="Migrations\201610120204124_ShipAddress_MaxLength.Designer.cs">
-      <DependentUpon>201610120204124_ShipAddress_MaxLength.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610120303579_role.cs" />
-    <Compile Include="Migrations\201610120303579_role.Designer.cs">
-      <DependentUpon>201610120303579_role.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610120306123_role1.cs" />
-    <Compile Include="Migrations\201610120306123_role1.Designer.cs">
-      <DependentUpon>201610120306123_role1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610120338581_menuinfo.cs" />
-    <Compile Include="Migrations\201610120338581_menuinfo.Designer.cs">
-      <DependentUpon>201610120338581_menuinfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610120340027_menuinfo1.cs" />
-    <Compile Include="Migrations\201610120340027_menuinfo1.Designer.cs">
-      <DependentUpon>201610120340027_menuinfo1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepository\IBrandRepository.cs" />
     <Compile Include="Repositories\IRepository\ICategoryRepository.cs" />
@@ -140,39 +95,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610110834370_InitialCreate.resx">
-      <DependentUpon>201610110834370_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610110846112_201610111646.resx">
-      <DependentUpon>201610110846112_201610111646.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610110923294_AddBrand.resx">
-      <DependentUpon>201610110923294_AddBrand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610110925222_editBrand.resx">
-      <DependentUpon>201610110925222_editBrand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610120144231_editship.resx">
-      <DependentUpon>201610120144231_editship.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610120200064_ShipAddress_string.resx">
-      <DependentUpon>201610120200064_ShipAddress_string.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610120204124_ShipAddress_MaxLength.resx">
-      <DependentUpon>201610120204124_ShipAddress_MaxLength.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610120303579_role.resx">
-      <DependentUpon>201610120303579_role.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610120306123_role1.resx">
-      <DependentUpon>201610120306123_role1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610120338581_menuinfo.resx">
-      <DependentUpon>201610120338581_menuinfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610120340027_menuinfo1.resx">
-      <DependentUpon>201610120340027_menuinfo1.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

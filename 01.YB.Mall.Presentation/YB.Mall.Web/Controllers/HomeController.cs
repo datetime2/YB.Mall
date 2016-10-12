@@ -25,21 +25,7 @@ namespace YB.Mall.Web.Controllers
                 PassWord = new Guid().ToString(),
                 CreateTime = DateTime.Now
             });
-
-            userService.Login("51aspx", "00000000-0000-0000-0000-000000000000");
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            //userService.Login("51aspx", "00000000-0000-0000-0000-000000000000");
 
             return View();
         }

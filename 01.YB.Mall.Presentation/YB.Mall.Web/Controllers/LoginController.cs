@@ -20,13 +20,23 @@ namespace YB.Mall.Web.Controllers
         {
             return View();
         }
+
         [HttpPost]
-        public JsonResult ManageLogin(string loginname,string password,string code)
+        public JsonResult ManageLogin(string loginname, string password, string code)
         {
-            return Json(null);
+            var manage = mangService.Login(loginname, password);
+            if (manage != null)
+                return Json(new AjaxResult());
+            else
+                return Json(new AjaxResult
+                {
+                    success = false,
+                    message = "用户名密码错误"
+                });
         }
+
         [HttpGet]
-        public ActionResult GetAuthCode()
+        public ActionResult AuthCode()
         {
             return File(new VerifyCode().GetVerifyCode(), @"image/Gif");
         }

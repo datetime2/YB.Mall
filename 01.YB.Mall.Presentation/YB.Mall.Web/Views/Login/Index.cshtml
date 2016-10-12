@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NFine快速开发平台</title>
+    <title>YB.Mall</title>
     <link href="~/Content/css/framework-font.css" rel="stylesheet" />
     <link href="~/Content/css/framework-login.css" rel="stylesheet" />
     <script src="~/Content/js/jquery/jquery-2.1.1.min.js"></script>
@@ -17,10 +17,10 @@
 <body>
     <div class="wrapper">
         <div class="container">
-            <div class="logo">
+            @*<div class="logo">
                 <i class="fa fa-modx"></i>
                 <h1><span>NFine</span>快速开发平台</h1>
-            </div>
+            </div>*@
             <form class="form">
                 <div class="row">
                     <input id="txt_account" type="text" placeholder="用户名/手机号/邮箱">
@@ -33,8 +33,8 @@
                 <div class="row">
                     <input id="txt_code" maxlength="4" type="text" placeholder="验证码" style="width: 190px; float: left;">
                     <div style="width: 110px; float: right; padding-top: 14px; padding-left: 14px;">
-                        看不清？<a id="switchCode" href="javascript:void();" style="text-decoration: none;">换一张</a>
-                        <img id="imgcode" class="authcode" src="~/Login/GetAuthCode" width="80" height="25" />
+                        看不清?<a id="switchCode" href="javascript:void();" style="text-decoration: none;">换一张</a>
+                        <img id="imgcode" class="authcode" src="/Login/AuthCode" width="80" height="25" />
                     </div>
                 </div>
                 <div class="row">
@@ -84,12 +84,12 @@
                     } else {
                         $("#login_button").attr('disabled', 'disabled').find('span').html("loading...");
                         $.ajax({
-                            url: "/Login/CheckLogin",
+                            url: "/Login/ManageLogin",
                             data: { username: $.trim($username.val()), password: $.md5($.trim($password.val())), code: $.trim($code.val()) },
                             type: "post",
                             dataType: "json",
                             success: function (data) {
-                                if (data.state == "success") {
+                                if (data.success) {
                                     $("#login_button").find('span').html("登录成功，正在跳转...");
                                     window.setTimeout(function () {
                                         window.location.href = "/Home/Index";
