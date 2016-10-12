@@ -20,7 +20,9 @@ namespace YB.Mall.Data
         public DbSet<CategoryInfo> CategoryInfo { get; set; }
         public DbSet<ProductInfo> ProductInfo { get; set; }
         public DbSet<BrandInfo> BrandInfo { get; set; }
-
+        public DbSet<RoleInfo> RoleInfo { get; set; }
+        public DbSet<ManageInfo> ManageInfo { get; set; }
+        public DbSet<MenuInfo> MenuInfo { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -30,7 +32,9 @@ namespace YB.Mall.Data
             modelBuilder.Configurations.Add(new OrderItemInfoConfiguration());
             modelBuilder.Configurations.Add(new ProductInfoConfiguration());
             modelBuilder.Configurations.Add(new BrandInfoConfiguration());
-
+            modelBuilder.Configurations.Add(new RoleInfoConfiguration());
+            modelBuilder.Configurations.Add(new ManageInfoConfiguration());
+            modelBuilder.Configurations.Add(new MenuInfoConfiguration());
         }
     }
     public class MallDbInitializer : DropCreateDatabaseIfModelChanges<MallContext>

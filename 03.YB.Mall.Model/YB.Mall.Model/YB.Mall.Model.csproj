@@ -40,11 +40,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Manager\ManageInfo.cs" />
+    <Compile Include="Manager\RoleInfo.cs" />
     <Compile Include="Order\OrderInfo.cs" />
     <Compile Include="Order\OrderItemInfo.cs" />
     <Compile Include="Product\BrandInfo.cs" />
     <Compile Include="Product\CategoryInfo.cs" />
     <Compile Include="Product\ProductInfo.cs" />
+    <Compile Include="System\MenuInfo.cs" />
     <Compile Include="User\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -48,9 +48,12 @@
   <ItemGroup>
     <Compile Include="Configurations\BrandInfoConfiguration.cs" />
     <Compile Include="Configurations\CategoryInfoConfiguration.cs" />
+    <Compile Include="Configurations\ManageInfoConfiguration.cs" />
+    <Compile Include="Configurations\MenuInfoConfiguration.cs" />
     <Compile Include="Configurations\OrderInfoConfiguration.cs" />
     <Compile Include="Configurations\OrderItemInfoConfiguration.cs" />
     <Compile Include="Configurations\ProductInfoConfiguration.cs" />
+    <Compile Include="Configurations\RoleInfoConfiguration.cs" />
     <Compile Include="Configurations\UserInfoConfiguration.cs" />
     <Compile Include="Infrastructure\DatabaseFactory.cs" />
     <Compile Include="Infrastructure\Disposable.cs" />
@@ -84,6 +87,22 @@
     <Compile Include="Migrations\201610120204124_ShipAddress_MaxLength.cs" />
     <Compile Include="Migrations\201610120204124_ShipAddress_MaxLength.Designer.cs">
       <DependentUpon>201610120204124_ShipAddress_MaxLength.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610120303579_role.cs" />
+    <Compile Include="Migrations\201610120303579_role.Designer.cs">
+      <DependentUpon>201610120303579_role.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610120306123_role1.cs" />
+    <Compile Include="Migrations\201610120306123_role1.Designer.cs">
+      <DependentUpon>201610120306123_role1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610120338581_menuinfo.cs" />
+    <Compile Include="Migrations\201610120338581_menuinfo.Designer.cs">
+      <DependentUpon>201610120338581_menuinfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610120340027_menuinfo1.cs" />
+    <Compile Include="Migrations\201610120340027_menuinfo1.Designer.cs">
+      <DependentUpon>201610120340027_menuinfo1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -134,6 +153,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610120204124_ShipAddress_MaxLength.resx">
       <DependentUpon>201610120204124_ShipAddress_MaxLength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610120303579_role.resx">
+      <DependentUpon>201610120303579_role.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610120306123_role1.resx">
+      <DependentUpon>201610120306123_role1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610120338581_menuinfo.resx">
+      <DependentUpon>201610120338581_menuinfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610120340027_menuinfo1.resx">
+      <DependentUpon>201610120340027_menuinfo1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
