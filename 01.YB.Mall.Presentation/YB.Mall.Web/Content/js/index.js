@@ -1,4 +1,13 @@
-var storage, fail, uid; try { uid = new Date; (storage = window.localStorage).setItem(uid, uid); fail = storage.getItem(uid) != uid; storage.removeItem(uid); fail && (storage = false); } catch (e) { }
+var storage, fail, uid;
+try {
+    uid = new Date;
+    (storage = window.localStorage).setItem(uid, uid);
+    fail = storage.getItem(uid) != uid;
+    storage.removeItem(uid);
+    fail && (storage = false);
+} catch (e) {
+    
+}
 if (storage) {
     var usedSkin = localStorage.getItem('config-skin');
     if (usedSkin != '' && usedSkin != null) {
@@ -12,17 +21,19 @@ if (storage) {
 else {
     document.body.className = 'theme-blue';
 }
-$(function () {
+$(function() {
     if (storage) {
         try {
             var usedSkin = localStorage.getItem('config-skin');
             if (usedSkin != '') {
-                $('#skin-colors .skin-changer').removeClass('active'); $('#skin-colors .skin-changer[data-skin="' + usedSkin + '"]').addClass('active');
+                $('#skin-colors .skin-changer').removeClass('active');
+                $('#skin-colors .skin-changer[data-skin="' + usedSkin + '"]').addClass('active');
             }
+        } catch (e) {
+            console.log(e);
         }
-        catch (e) { console.log(e); }
     }
-})
+});
 $.fn.removeClassPrefix = function (prefix) {
     this.each(function (i, el) {
         var classes = el.className.split(" ").filter(function (c) {
@@ -33,7 +44,10 @@ $.fn.removeClassPrefix = function (prefix) {
     return this;
 };
 $(function ($) {
-    $('#config-tool-cog').on('click', function () { $('#config-tool').toggleClass('closed'); }); $('#config-fixed-header').on('change', function () {
+    $('#config-tool-cog').on('click', function() {
+         $('#config-tool').toggleClass('closed');
+    });
+    $('#config-fixed-header').on('change', function () {
         var fixedHeader = '';
         if ($(this).is(':checked')) {
             $('body').addClass('fixed-header'); fixedHeader = 'fixed-header';

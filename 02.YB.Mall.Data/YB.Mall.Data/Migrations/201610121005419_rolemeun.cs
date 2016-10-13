@@ -15,13 +15,13 @@ namespace YB.Mall.Data.Migrations
                         MenuId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.RoleId, t.MenuId })
-                .ForeignKey("dbo.T_MenuInfo", t => t.RoleId, cascadeDelete: true)
-                .ForeignKey("dbo.T_RoleInfo", t => t.MenuId, cascadeDelete: true)
+                .ForeignKey("dbo.T_MenuInfo", t => t.RoleId, cascadeDelete: false)
+                .ForeignKey("dbo.T_RoleInfo", t => t.MenuId, cascadeDelete: false)
                 .Index(t => t.RoleId)
                 .Index(t => t.MenuId);
             
             AddColumn("dbo.T_MenuInfo", "UrlPath", c => c.String(nullable: false, maxLength: 80));
-            AddColumn("dbo.T_MenuInfo", "Target", c => c.String(nullable: false, maxLength: 20));
+            AddColumn("dbo.T_MenuInfo", "Target", c => c.String(nullable: false, maxLength: 20, defaultValue: "iframe"));
             AddColumn("dbo.T_MenuInfo", "LastUpdTime", c => c.DateTime());
             AlterColumn("dbo.T_ManageInfo", "Phone", c => c.String(maxLength: 20));
         }
