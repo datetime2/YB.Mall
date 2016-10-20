@@ -3,9 +3,9 @@ using YB.Mall.Model;
 
 namespace YB.Mall.Data.Repositories
 {
-    public class UserInfoRepository : Repository<UserInfo>, IUserRepository
+    public class RoleRepository : Repository<RoleInfo>, IRoleRepository
     {
-        public UserInfoRepository(IDatabaseFactory dbFactory)
+        public RoleRepository(IDatabaseFactory dbFactory)
             : base(dbFactory)
         {
         }

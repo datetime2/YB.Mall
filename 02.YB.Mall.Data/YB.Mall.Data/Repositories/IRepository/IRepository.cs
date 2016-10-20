@@ -4,6 +4,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using YB.Mall.Model.QueryModel;
+using YB.Mall.Model.ViewModel;
 
 namespace YB.Mall.Data.Repositories
 {
@@ -19,11 +21,8 @@ namespace YB.Mall.Data.Repositories
         bool Delete(Expression<Func<T, bool>> predi);
         IQueryable<T> Query(Expression<Func<T, bool>> where);
         T Single(Expression<Func<T, bool>> where);
-
-        IQueryable<T> Paging(IQueryable<T> entities, Expression<Func<T, bool>> where, int page, int size,
-            out int total);
-        IQueryable<T> Paging<T, TKey>(IQueryable<T> entities, Expression<Func<T, bool>> where, int page, int size,
-            out int total, Expression<Func<T, TKey>> sort, bool desc = true);
+        PagerViewModel<T> Pager<TKey>(Expression<Func<T, bool>> where, int page, int size,Expression<Func<T, TKey>> sort=null, bool desc = true);
+        PagerViewModel<T> Pager<TKey>(PagerQueryModel<T, TKey> query);
     }
 
 }

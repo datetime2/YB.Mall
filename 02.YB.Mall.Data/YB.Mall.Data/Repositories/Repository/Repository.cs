@@ -10,6 +10,9 @@ using System.Linq.Expressions;
 using System.Reflection;
 using YB.Mall.Data.Infrastructure;
 using EntityFramework.Extensions;
+using YB.Mall.Model.QueryModel;
+using YB.Mall.Model.ViewModel;
+
 namespace YB.Mall.Data.Repositories
 {
     public abstract class Repository<T> where T : class, new()
@@ -24,7 +27,7 @@ namespace YB.Mall.Data.Repositories
 
         private IDatabaseFactory DatabaseFactory
         {
-            get; 
+            get;
             set;
         }
 
@@ -63,7 +66,7 @@ namespace YB.Mall.Data.Repositories
             return _dbset.FirstOrDefault(where);
         }
         public virtual IEnumerable<T> GetAll()
-        {            
+        {
             return _dbset.ToList();
         }
         public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where)
@@ -74,20 +77,43 @@ namespace YB.Mall.Data.Repositories
         {
             return _dbset.Where(where);
         }
-        public virtual IQueryable<T> Paging(IQueryable<T> entities, Expression<Func<T, bool>> where, int page, int size, out int total)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TKey">排序字段</typeparam>
+        /// <param name="where">条件</param>
+        /// <param name="page">页码</param>
+        /// <param name="size">分页数</param>
+        /// <param name="sort">排序</param>
+        /// <param name="desc">倒序</param>
+        /// <returns></returns>
+        public virtual PagerViewModel<T> Pager<TKey>(Expression<Func<T, bool>> where, int page,
+            int size, Expression<Func<T, TKey>> sort = null, bool desc = true)
         {
-            total = entities.Count(where);
-            return entities.Where(where).Skip((page - 1) * size).Take(size);
+            var grid = new PagerViewModel<T>();
+            var entities = _dbset.Where(where);
+            grid.Total = entities.Count();
+            grid.Data = sort == null
+                ? entities.Skip((page - 1)*size).Take(size)
+                : (!desc
+                    ? entities.OrderBy(sort).Skip((page - 1)*size).Take(size)
+                    : entities.OrderByDescending(sort).Skip((page - 1)*size).Take(size));
+            return grid;
         }
 
-        public virtual IQueryable<T> Paging<T, TKey>(IQueryable<T> entities, Expression<Func<T, bool>> where, int page,
-            int size, out int total, Expression<Func<T, TKey>> sort, bool desc = true)
+        public virtual PagerViewModel<T> Pager<TKey>(PagerQueryModel<T, TKey> query)
         {
-            total = entities.Count(where);
-            var newEntities = !desc
-                ? entities.Where(@where).OrderBy(sort).Skip((page - 1)*size).Take(size)
-                : entities.Where(@where).OrderByDescending(sort).Skip((page - 1)*size).Take(size);
-            return newEntities;
+            var grid = new PagerViewModel<T>();
+            var entities = _dbset.Where(query.Where);
+            grid.Total = entities.Count();
+            grid.Data = query.Sort == null
+                ? entities.Skip((query.Page.Value - 1)*query.Size.Value).Take(query.Size.Value)
+                : (!query.Desc
+                    ? entities.OrderBy(query.Sort).Skip((query.Page.Value - 1)*query.Size.Value).Take(query.Size.Value)
+                    : entities.OrderByDescending(query.Sort)
+                        .Skip((query.Page.Value - 1)*query.Size.Value)
+                        .Take(query.Size.Value));
+            return grid;
         }
     }
 }
