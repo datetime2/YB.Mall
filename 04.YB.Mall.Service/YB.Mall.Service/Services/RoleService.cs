@@ -2,8 +2,11 @@
 using System.Linq;
 using YB.Mall.Data.Infrastructure;
 using YB.Mall.Data.Repositories;
+using YB.Mall.Extend.Linq;
+using YB.Mall.Model;
+using YB.Mall.Model.QueryModel;
 using YB.Mall.Model.ViewModel;
-
+using YB.Mall.Extend.Helper;
 namespace YB.Mall.Service
 {
     public class RoleService : IRoleService
@@ -42,6 +45,29 @@ namespace YB.Mall.Service
                 });
             }
             return list;
+        }
+
+        public jqGridPagerViewModel<RoleInfo, dynamic> RoleGrid(RoleQueryModel query)
+        {
+            var predicate = PredicateBuilderUtility.True<RoleInfo>();
+            if (!string.IsNullOrWhiteSpace(query.keyword))
+                predicate = predicate.And(s => s.RoleName.Contains(query.keyword));
+            var grid = repository.Pager(query, predicate);
+            return new jqGridPagerViewModel<RoleInfo, dynamic>
+            {
+                rows = grid.rows.Select(s => new
+                {
+                    RoleId = s.RoleId,
+                    RoleName = s.RoleName,
+                    AllowDelte = s.AllowDelte,
+                    Status = s.Status,
+                    AllowEdit = s.AllowEdit,
+                    RoleType = ((RoleType) s.RoleType).ToDescription()
+                }),
+                size = grid.size,
+                page = grid.page,
+                records = grid.records
+            };
         }
     }
 }

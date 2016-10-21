@@ -66,6 +66,10 @@
       <Project>{c8527412-5081-474e-9266-0042064d0091}</Project>
       <Name>YB.Mall.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\05.YB.Mall.Extend\YB.Mall.Extend\YB.Mall.Extend.csproj">
+      <Project>{a0c3c519-2ddc-4208-9ccd-918fbf9cecdd}</Project>
+      <Name>YB.Mall.Extend</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

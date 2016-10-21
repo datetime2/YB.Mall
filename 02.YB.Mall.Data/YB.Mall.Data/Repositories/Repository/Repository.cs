@@ -12,7 +12,7 @@ using YB.Mall.Data.Infrastructure;
 using EntityFramework.Extensions;
 using YB.Mall.Model.QueryModel;
 using YB.Mall.Model.ViewModel;
-
+using YB.Mall.Extend.Linq;
 namespace YB.Mall.Data.Repositories
 {
     public abstract class Repository<T> where T : class, new()
@@ -87,33 +87,46 @@ namespace YB.Mall.Data.Repositories
         /// <param name="sort">排序</param>
         /// <param name="desc">倒序</param>
         /// <returns></returns>
-        public virtual PagerViewModel<T> Pager<TKey>(Expression<Func<T, bool>> where, int page,
+        public virtual jqGridPagerViewModel<T,dynamic> Pager<TKey>(Expression<Func<T, bool>> where, int page,
             int size, Expression<Func<T, TKey>> sort = null, bool desc = true)
         {
-            var grid = new PagerViewModel<T>();
             var entities = _dbset.Where(where);
-            grid.Total = entities.Count();
-            grid.Data = sort == null
-                ? entities.Skip((page - 1)*size).Take(size)
-                : (!desc
-                    ? entities.OrderBy(sort).Skip((page - 1)*size).Take(size)
-                    : entities.OrderByDescending(sort).Skip((page - 1)*size).Take(size));
-            return grid;
+            return new jqGridPagerViewModel<T, dynamic>
+            {
+                records = entities.Count(),
+                page = page,
+                size = size,
+                rows = sort == null
+                    ? entities.Skip((page - 1)*size).Take(size)
+                    : (!desc
+                        ? entities.OrderBy(sort).Skip((page - 1)*size).Take(size)
+                        : entities.OrderByDescending(sort).Skip((page - 1)*size).Take(size))
+            };
         }
-
-        public virtual PagerViewModel<T> Pager<TKey>(PagerQueryModel<T, TKey> query)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public virtual jqGridPagerViewModel<T, dynamic> Pager(PagerQueryModel query, Expression<Func<T, bool>> where)
         {
-            var grid = new PagerViewModel<T>();
-            var entities = _dbset.Where(query.Where);
-            grid.Total = entities.Count();
-            grid.Data = query.Sort == null
-                ? entities.Skip((query.Page.Value - 1)*query.Size.Value).Take(query.Size.Value)
-                : (!query.Desc
-                    ? entities.OrderBy(query.Sort).Skip((query.Page.Value - 1)*query.Size.Value).Take(query.Size.Value)
-                    : entities.OrderByDescending(query.Sort)
-                        .Skip((query.Page.Value - 1)*query.Size.Value)
-                        .Take(query.Size.Value));
-            return grid;
+            var entities = _dbset.Where(where);
+            return new jqGridPagerViewModel<T, dynamic>
+            {
+                records = entities.Count(),
+                page = query.page.Value,
+                size = query.rows,
+                rows = query.sidx == null
+                    ? entities.Skip((query.page.Value - 1)*query.rows.Value).Take(query.rows.Value)
+                    : (query.sord == "asc"
+                        ? entities.OrderBy(query.sidx)
+                            .Skip((query.page.Value - 1)*query.rows.Value)
+                            .Take(query.rows.Value)
+                        : entities.OrderBy(query.sidx, true)
+                            .Skip((query.page.Value - 1)*query.rows.Value)
+                            .Take(query.rows.Value))
+            };
         }
     }
 }

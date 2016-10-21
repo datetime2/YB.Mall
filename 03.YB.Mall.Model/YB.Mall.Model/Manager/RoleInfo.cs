@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace YB.Mall.Model
 {
@@ -11,7 +12,10 @@ namespace YB.Mall.Model
         }
         public int RoleId { get; set; }
         public string RoleName { get; set; }
-        public int? Status { get; set; }
+        public int Status { get; set; }
+        public bool AllowDelte { get; set; }
+        public bool AllowEdit { get; set; }
+        public RoleType RoleType { get; set; }
         public virtual ICollection<ManageInfo> ManageInfo { get; set; }
         public virtual ICollection<MenuInfo> MenuInfo { get; set; }
     }

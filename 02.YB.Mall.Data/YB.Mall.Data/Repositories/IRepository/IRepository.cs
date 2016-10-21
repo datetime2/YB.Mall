@@ -21,8 +21,8 @@ namespace YB.Mall.Data.Repositories
         bool Delete(Expression<Func<T, bool>> predi);
         IQueryable<T> Query(Expression<Func<T, bool>> where);
         T Single(Expression<Func<T, bool>> where);
-        PagerViewModel<T> Pager<TKey>(Expression<Func<T, bool>> where, int page, int size,Expression<Func<T, TKey>> sort=null, bool desc = true);
-        PagerViewModel<T> Pager<TKey>(PagerQueryModel<T, TKey> query);
+        jqGridPagerViewModel<T,dynamic> Pager<TKey>(Expression<Func<T, bool>> where, int page, int size,Expression<Func<T, TKey>> sort=null, bool desc = true);
+        jqGridPagerViewModel<T, dynamic> Pager(PagerQueryModel query, Expression<Func<T, bool>> where);
     }
 
 }
