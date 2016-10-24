@@ -4,7 +4,7 @@ using YB.Mall.Model;
 
 namespace YB.Mall.Data.Configurations
 {
-    public class MenuInfoConfiguration:EntityTypeConfiguration<MenuInfo>
+    public class MenuInfoConfiguration : EntityTypeConfiguration<MenuInfo>
     {
         public MenuInfoConfiguration()
         {
@@ -16,6 +16,7 @@ namespace YB.Mall.Data.Configurations
             this.Property(s => s.Target).IsRequired().HasMaxLength(20);
             this.Property(s => s.UrlPath).IsRequired().HasMaxLength(80);
             this.Property(s => s.Icon).HasMaxLength(30);
+            this.Property(s => s.Remark).HasMaxLength(200);
             this.HasMany(s => s.RoleInfo).WithMany(s => s.MenuInfo).Map(rm =>
             {
                 rm.MapLeftKey("RoleId");

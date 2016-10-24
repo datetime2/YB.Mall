@@ -422,9 +422,9 @@ $.fn.dataGrid = function (options) {
         } else {
             $operate.animate({ "left": '-100.1%' }, 200);
         }
-        $operate.find('.close').click(function () {
+        $operate.find('.close').click(function() {
             $operate.animate({ "left": '-100.1%' }, 200);
-        })
+        });
     };
     $element.jqGrid(options);
 };

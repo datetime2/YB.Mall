@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\SystemManage\Controllers\MenuButtonController.cs" />
     <Compile Include="Areas\SystemManage\Controllers\MenuController.cs" />
     <Compile Include="Areas\SystemManage\Controllers\RoleController.cs" />
     <Compile Include="Areas\SystemManage\SystemManageAreaRegistration.cs" />
@@ -399,6 +400,9 @@
     <Content Include="Areas\SystemManage\Views\Role\Index.cshtml" />
     <Content Include="Areas\SystemManage\Views\Menu\Form.cshtml" />
     <Content Include="Areas\SystemManage\Views\Role\Form.cshtml" />
+    <Content Include="Areas\SystemManage\Views\Menu\Detail.cshtml" />
+    <Content Include="Areas\SystemManage\Views\MenuButton\Index.cshtml" />
+    <Content Include="Areas\SystemManage\Views\MenuButton\Form.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

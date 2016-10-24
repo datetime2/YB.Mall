@@ -2,17 +2,11 @@
     Layout = "~/Views/Shared/_Index.cshtml";
 }
 <script>
-    $(function() {
-        $.menu.initGrid();
-        $("#btn_search").click(function() {
-            $("#grid").jqGrid('setGridParam', {
-                postData: { keyword: $("#txt_keyword").val() }
-            }).trigger('reloadGrid');
-        });
+    $(function () {
+        $.menuIndex.initGrid();
     });
-
     (function($) {
-        $.menu = {
+        $.menuIndex = {
             initGrid: function() {
                 $("#grid").dataGrid({
                     treeGrid: true,
@@ -32,11 +26,11 @@
                             formatter: function(cellvalue) {
                                 if (cellvalue === "expand") {
                                     return "无页面";
-                                }  else if (cellvalue === "open") {
+                                } else if (cellvalue === "open") {
                                     return "弹出页";
                                 } else if (cellvalue === "blank") {
                                     return "新窗口";
-                                }else if (cellvalue === "iframe") {
+                                } else if (cellvalue === "iframe") {
                                     return "框架页";
                                 } else return "";
                             }
@@ -47,7 +41,7 @@
                             width: 60,
                             align: "center",
                             formatter: function(cellvalue) {
-                                return cellvalue? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                                return cellvalue ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                             }
                         },
                         {
@@ -56,7 +50,7 @@
                             width: 60,
                             align: "center",
                             formatter: function(cellvalue) {
-                                return cellvalue? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                                return cellvalue ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                             }
                         },
                         {
@@ -65,96 +59,72 @@
                             width: 60,
                             align: "center",
                             formatter: function(cellvalue) {
-                                return cellvalue? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                                return cellvalue ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                             }
                         },
-                        { label: '介绍', name: 'F_Description', width: 300, align: 'left' }
+                        { label: '介绍', name: 'Remark', width: 300, align: 'left' }
                     ]
                 });
             },
-            popupForm: function(title,url) {
+            addMenu: function() {
                 $.modalOpen({
                     id: "Form",
-                    title: title,
-                    url: url,
+                    title: "新增菜单",
+                    url: "/SystemManage/Menu/Form",
                     width: "700px",
                     height: "440px",
-                    callBack: function (iframeId) {
-                        top.frames[iframeId].submitForm();
+                    callBack: function(iframeId) {
+                        top.frames[iframeId].$.menuFrom.submitForm();
                     }
                 });
             },
-            popupDetail: function (title, url,button) {
+            editMenu: function() {
+                var keyValue = $("#grid").jqGridRowValue().MenuId;
                 $.modalOpen({
-                    id: "Details",
-                    title: title,
-                    url: url,
+                    id: "Form",
+                    title: "修改菜单",
+                    url: "/SystemManage/Menu/Form?keyValue=" + keyValue,
+                    width: "700px",
+                    height: "440px",
+                    callBack: function(iframeId) {
+                        top.frames[iframeId].$.menuFrom.submitForm();
+                    }
+                });
+            },
+            removeMenu: function() {
+                $.deleteForm({
+                    url: "/SystemManage/Menu/Remove",
+                    param: { keyValue: $("#grid").jqGridRowValue().MenuId },
+                    success: function() {
+                        $.currentWindow().$("#grid").resetSelection();
+                        $.currentWindow().$("#grid").trigger("reloadGrid");
+                    }
+                });
+            },
+            detailMenu: function() {
+                var keyValue = $("#grid").jqGridRowValue().MenuId;
+                $.modalOpen({
+                    id: "Detail",
+                    title: "查看菜单",
+                    url: "/SystemManage/Menu/Detail?keyValue=" + keyValue,
                     width: "700px",
                     height: "490px",
-                    btn: button
+                    btn: null
+                });
+            },
+            menuButton:function() {
+                var keyValue = $("#grid").jqGridRowValue().MenuId;
+                $.modalOpen({
+                    id: "modulebutton",
+                    title: "系统按钮",
+                    url: "/SystemManage/MenuButton/Index?menuId=" + keyValue,
+                    width: "950px",
+                    height: "600px",
+                    btn: null
                 });
             }
         };
     })(jQuery);
-
-    
-    function btn_add() {
-        $.modalOpen({
-            id: "Form",
-            title: "新增菜单",
-            url: "/SystemManage/Module/Form",
-            width: "700px",
-            height: "440px",
-            callBack: function (iframeId) {
-                top.frames[iframeId].submitForm();
-            }
-        });
-    }
-    function btn_edit() {
-        var keyValue = $("#grid").jqGridRowValue().F_Id;
-        $.modalOpen({
-            id: "Form",
-            title: "修改菜单",
-            url: "/SystemManage/Module/Form?keyValue=" + keyValue,
-            width: "700px",
-            height: "440px",
-            callBack: function (iframeId) {
-                top.frames[iframeId].submitForm();
-            }
-        });
-    }
-    function btn_delete() {
-        $.deleteForm({
-            url: "/SystemManage/Module/DeleteForm",
-            param: { keyValue: $("#grid").jqGridRowValue().F_Id },
-            success: function() {
-                $.currentWindow().$("#grid").resetSelection();
-                $.currentWindow().$("#grid").trigger("reloadGrid");
-            }
-        });
-    }
-    function btn_details() {
-        var keyValue = $("#grid").jqGridRowValue().F_Id;
-        $.modalOpen({
-            id: "Details",
-            title: "查看菜单",
-            url: "/SystemManage/Module/Details?keyValue=" + keyValue,
-            width: "700px",
-            height: "490px",
-            btn: null
-        });
-    }
-    function btn_modulebutton() {
-        var keyValue = $("#grid").jqGridRowValue().F_Id;
-        $.modalOpen({
-            id: "modulebutton",
-            title: "系统按钮",
-            url: "/SystemManage/ModuleButton/Index?moduleId=" + keyValue,
-            width: "950px",
-            height: "600px",
-            btn: null
-        });
-    }
 </script>
 
 <div class="topPanel">
@@ -163,35 +133,21 @@
             <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
         </div>
         <div class="btn-group">
-            <a id="Add" authorize="yes" class="btn btn-primary dropdown-text" onclick="$.menu.popupForm('新增菜单', '/SystemManage/Menu/Form')"><i class="fa fa-plus"></i>新增菜单</a>
+            <a id="Add" authorize="yes" class="btn btn-primary dropdown-text" onclick="$.menuIndex.addMenu()"><i class="fa fa-plus"></i>新增菜单</a>
         </div>
         <div class="operate">
             <ul class="nav nav-pills">
                 <li class="first">已选中<span>1</span>项</li>
-                <li><a id="Edit" authorize="yes" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改菜单</a></li>
-                <li><a id="Remove" authorize="yes" onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除菜单</a></li>
-                <li><a id="View" authorize="yes" onclick="btn_details()"><i class="fa fa-search-plus"></i>查看菜单</a></li>
+                <li><a id="Edit" authorize="yes" onclick="$.menuIndex.editMenu()"><i class="fa fa-pencil-square-o"></i>修改菜单</a></li>
+                <li><a id="Remove" authorize="yes" onclick="$.menuIndex.removeMenu()"><i class="fa fa-trash-o"></i>删除菜单</a></li>
+                <li><a id="View" authorize="yes" onclick="$.menuIndex.detailMenu()"><i class="fa fa-search-plus"></i>查看菜单</a></li>
                 <li class="split"></li>
-                <li><a id="NF-modulebutton" authorize="yes" onclick="btn_modulebutton()"><i class="fa fa-gavel"></i>按钮管理</a></li>
+                <li><a id="NF-modulebutton" authorize="yes" onclick="$.menuIndex.menuButton()"><i class="fa fa-gavel"></i>按钮管理</a></li>
             </ul>
             <a href="javascript:;" class="close"></a>
         </div>
         <script>$('.toolbar').authorizeButton()</script>
     </div>
-    @*<div class="search">
-        <table>
-            <tr>
-                <td>
-                    <div class="input-group">
-                        <input id="txt_keyword" type="text" class="form-control" placeholder="请输入要查询关键字" style="width: 200px;">
-                        <span class="input-group-btn">
-                            <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>*@
 </div>
 <div class="gridPanel">
     <table id="grid"></table>

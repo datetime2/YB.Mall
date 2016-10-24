@@ -11,5 +11,6 @@
         public bool IsMenu { get; set; }
         public bool IsButton { get; set; }
         public bool IsEnabled { get; set; }
+        public string Remark { get; set; }
     }
 }

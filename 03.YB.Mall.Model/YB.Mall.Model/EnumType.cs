@@ -54,5 +54,5 @@ namespace YB.Mall.Model
         /// </summary>
         [Description("商品部")]
         Product
-    }
+    }    
 }

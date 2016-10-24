@@ -8,7 +8,7 @@ using YB.Mall.Service;
 
 namespace YB.Mall.Web.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
         private readonly IManageService mangService;
 
@@ -26,13 +26,9 @@ namespace YB.Mall.Web.Controllers
         {
             var manage = mangService.Login(loginname, password);
             if (manage != null)
-                return Json(new AjaxResult());
+                return Success("操作成功");
             else
-                return Json(new AjaxResult
-                {
-                    success = false,
-                    message = "用户名密码错误"
-                });
+                return Error("用户名密码错误");
         }
 
         [HttpGet]

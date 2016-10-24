@@ -23,7 +23,7 @@ namespace YB.Mall.Service
 
         public List<RoleMenuViewModel> RoleMenu(int? roleId)
         {
-            var grid = menuRepository.Query(s => s.Status == 0);
+            var grid = menuRepository.Query(s => s.IsEnabled);
             var list = new List<RoleMenuViewModel>();
             foreach (var item in grid.Where(s => s.ParentId == 0))
             {
