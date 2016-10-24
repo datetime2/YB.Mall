@@ -17,64 +17,55 @@
                 $("#grid").dataGrid({
                     treeGrid: true,
                     treeGridModel: "adjacency",
-                    ExpandColumn: "F_UrlAddress",
+                    ExpandColumn: "UrlPath",
                     url: "/SystemManage/Menu/InitGrid",
                     height: $(window).height() - 96,
                     colModel: [
-                        { label: "主键", name: "F_Id", hidden: true, key: true },
-                        { label: '名称', name: 'F_FullName', width: 200, align: 'left' },
-                        { label: '连接', name: 'F_UrlAddress', width: 260, align: 'left' },
+                        { label: "主键", name: "MenuId", hidden: true, key: true },
+                        { label: '名称', name: 'MenuName', width: 200, align: 'left' },
+                        { label: '连接', name: 'UrlPath', width: 260, align: 'left' },
                         {
                             label: '目标',
-                            name: 'F_Target',
+                            name: 'Target',
                             width: 80,
                             align: 'center',
                             formatter: function(cellvalue) {
-                                if (cellvalue == "expand") {
+                                if (cellvalue === "expand") {
                                     return "无页面";
-                                } else if (cellvalue == "iframe") {
-                                    return "框架页";
-                                } else if (cellvalue == "open") {
+                                }  else if (cellvalue === "open") {
                                     return "弹出页";
-                                } else if (cellvalue == "blank") {
+                                } else if (cellvalue === "blank") {
                                     return "新窗口";
-                                }
+                                }else if (cellvalue === "iframe") {
+                                    return "框架页";
+                                } else return "";
                             }
                         },
                         {
                             label: "菜单",
-                            name: "F_IsMenu",
+                            name: "IsMenu",
                             width: 60,
                             align: "center",
                             formatter: function(cellvalue) {
-                                return cellvalue == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                                return cellvalue? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                             }
                         },
                         {
-                            label: "展开",
-                            name: "F_IsExpand",
+                            label: "按钮",
+                            name: "IsButton",
                             width: 60,
                             align: "center",
                             formatter: function(cellvalue) {
-                                return cellvalue == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
-                            }
-                        },
-                        {
-                            label: "公共",
-                            name: "F_IsPublic",
-                            width: 60,
-                            align: "center",
-                            formatter: function(cellvalue) {
-                                return cellvalue == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                                return cellvalue? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                             }
                         },
                         {
                             label: "有效",
-                            name: "F_EnabledMark",
+                            name: "IsEnabled",
                             width: 60,
                             align: "center",
                             formatter: function(cellvalue) {
-                                return cellvalue == 1 ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                                return cellvalue? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                             }
                         },
                         { label: '介绍', name: 'F_Description', width: 300, align: 'left' }
@@ -187,7 +178,7 @@
         </div>
         <script>$('.toolbar').authorizeButton()</script>
     </div>
-    <div class="search">
+    @*<div class="search">
         <table>
             <tr>
                 <td>
@@ -200,7 +191,7 @@
                 </td>
             </tr>
         </table>
-    </div>
+    </div>*@
 </div>
 <div class="gridPanel">
     <table id="grid"></table>

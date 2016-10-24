@@ -15,6 +15,7 @@ namespace YB.Mall.Data.Configurations
             this.Property(s => s.ParentId).IsRequired();
             this.Property(s => s.Target).IsRequired().HasMaxLength(20);
             this.Property(s => s.UrlPath).IsRequired().HasMaxLength(80);
+            this.Property(s => s.Icon).HasMaxLength(30);
             this.HasMany(s => s.RoleInfo).WithMany(s => s.MenuInfo).Map(rm =>
             {
                 rm.MapLeftKey("RoleId");

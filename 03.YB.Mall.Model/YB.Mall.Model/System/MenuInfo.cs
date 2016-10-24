@@ -8,7 +8,7 @@ namespace YB.Mall.Model
         public MenuInfo()
         {
             this.Target = "iframe";
-            this.RoleInfo=new HashSet<RoleInfo>();
+            this.RoleInfo = new HashSet<RoleInfo>();
         }
         public int MenuId { get; set; }
         public int ParentId { get; set; }
@@ -18,6 +18,9 @@ namespace YB.Mall.Model
         public string Target { get; set; }
         public int? Status { get; set; }
         public int? Sort { get; set; }
+        public bool IsMenu { get; set; }
+        public bool IsButton { get; set; }
+        public bool IsEnabled { get; set; }
         public DateTime? LastUpdTime { get; set; }
         public virtual ICollection<RoleInfo> RoleInfo { get; set; }
     }

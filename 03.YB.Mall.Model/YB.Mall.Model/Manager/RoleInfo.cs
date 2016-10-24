@@ -16,6 +16,9 @@ namespace YB.Mall.Model
         public bool AllowDelte { get; set; }
         public bool AllowEdit { get; set; }
         public RoleType RoleType { get; set; }
+        public OrganizeType OrganizeType { get; set; }
+        public int Sort { get; set; }
+        public string Remark { get; set; }
         public virtual ICollection<ManageInfo> ManageInfo { get; set; }
         public virtual ICollection<MenuInfo> MenuInfo { get; set; }
     }

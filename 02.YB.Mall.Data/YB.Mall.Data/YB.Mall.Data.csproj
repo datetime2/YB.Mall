@@ -83,6 +83,18 @@
     <Compile Include="Migrations\201610200859580_role1659.Designer.cs">
       <DependentUpon>201610200859580_role1659.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610210705571_oragitionType.cs" />
+    <Compile Include="Migrations\201610210705571_oragitionType.Designer.cs">
+      <DependentUpon>201610210705571_oragitionType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610240313485_menuinfo.cs" />
+    <Compile Include="Migrations\201610240313485_menuinfo.Designer.cs">
+      <DependentUpon>201610240313485_menuinfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610240323496_menuinfo1.cs" />
+    <Compile Include="Migrations\201610240323496_menuinfo1.Designer.cs">
+      <DependentUpon>201610240323496_menuinfo1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepository\IBrandRepository.cs" />
@@ -136,6 +148,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610200859580_role1659.resx">
       <DependentUpon>201610200859580_role1659.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610210705571_oragitionType.resx">
+      <DependentUpon>201610210705571_oragitionType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610240313485_menuinfo.resx">
+      <DependentUpon>201610240313485_menuinfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610240323496_menuinfo1.resx">
+      <DependentUpon>201610240323496_menuinfo1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

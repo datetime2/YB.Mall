@@ -48,12 +48,15 @@
     <Compile Include="Product\CategoryInfo.cs" />
     <Compile Include="Product\ProductInfo.cs" />
     <Compile Include="QueryModel\BaseQueryModel.cs" />
+    <Compile Include="QueryModel\MenuQueryModel.cs" />
     <Compile Include="QueryModel\PagerQueryModel.cs" />
     <Compile Include="QueryModel\RoleQueryModel.cs" />
     <Compile Include="System\MenuInfo.cs" />
     <Compile Include="User\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\jqGridPagerViewModel.cs" />
+    <Compile Include="ViewModel\MenuSelectModel.cs" />
+    <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\RoleMenuViewModel.cs" />
     <Compile Include="ViewModel\RoleViewModel.cs" />
   </ItemGroup>
