@@ -41,7 +41,6 @@ namespace YB.Mall.Service
                     Icon = item.Icon,
                     MenuName = item.MenuName,
                     Target = item.Target,
-                    IsButton = item.IsButton,
                     IsMenu = item.IsMenu,
                     IsEnabled = item.IsEnabled,
                     Remark = item.Remark
@@ -57,7 +56,6 @@ namespace YB.Mall.Service
                     Icon = items.Icon,
                     MenuName = items.MenuName,
                     Target = items.Target,
-                    IsButton = items.IsButton,
                     IsMenu = items.IsMenu,
                     IsEnabled = items.IsEnabled,
                     Remark = items.Remark
@@ -107,7 +105,6 @@ namespace YB.Mall.Service
                     Icon = menu.Icon,
                     IsMenu = menu.IsMenu,
                     UrlPath = menu.UrlPath,
-                    IsButton = menu.IsButton,
                     IsEnabled = menu.IsEnabled,
                     ParentId = menu.ParentId,
                     LastUpdTime = DateTime.Now,
@@ -121,6 +118,10 @@ namespace YB.Mall.Service
                 unitOfWork.SaveChanges();
                 return menu.MenuId > 0;
             }
+        }
+        public bool Remove(System.Linq.Expressions.Expression<Func<MenuInfo, bool>> where)
+        {
+            return repository.Delete(where);
         }
     }
 }

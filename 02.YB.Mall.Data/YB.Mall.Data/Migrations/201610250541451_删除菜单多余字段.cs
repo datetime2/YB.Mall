@@ -3,16 +3,16 @@ namespace YB.Mall.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class remark : DbMigration
+    public partial class 删除菜单多余字段 : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.T_MenuInfo", "Remark", c => c.String(maxLength: 200));
+            DropColumn("dbo.T_MenuInfo", "IsButton");
         }
         
         public override void Down()
         {
-            DropColumn("dbo.T_MenuInfo", "Remark");
+            AddColumn("dbo.T_MenuInfo", "IsButton", c => c.Boolean(nullable: false));
         }
     }
 }

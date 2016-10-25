@@ -7,13 +7,13 @@ namespace YB.Mall.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class remark : IMigrationMetadata
+    public sealed partial class 删除菜单多余字段 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(remark));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(删除菜单多余字段));
         
         string IMigrationMetadata.Id
         {
-            get { return "201610240802286_remark"; }
+            get { return "201610250541451_删除菜单多余字段"; }
         }
         
         string IMigrationMetadata.Source

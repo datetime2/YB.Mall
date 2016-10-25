@@ -35,7 +35,8 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
                 ElementId = button.ElementId,
                 Event = button.Event,
                 Icon = button.Icon,
-                IsEnabled = button.IsEnabled
+                IsEnabled = button.IsEnabled,
+                Location = button.Location
             }, JsonRequestBehavior.AllowGet);
         }
 
@@ -43,6 +44,11 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         public JsonResult SubmitForm(MenuButtonInfo button, int? keyValue)
         {
             return buttonService.SubmitForm(button, keyValue) ? Success("操作成功") : Error("操作失败");
+        }
+        [HttpPost]
+        public JsonResult Remove(int? keyValue)
+        {
+            return buttonService.Remove(s => s.ButtonId == keyValue) ? Success("操作成功") : Error("操作失败");
         }
     }
 }

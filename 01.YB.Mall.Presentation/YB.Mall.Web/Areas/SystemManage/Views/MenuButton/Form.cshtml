@@ -9,7 +9,7 @@
     });
     (function ($) {
         $.formButton = {
-            initForm:function() {
+            initForm: function () {
                 if (!!keyValue) {
                     $.ajax({
                         url: "/SystemManage/MenuButton/InitForm",
@@ -22,7 +22,7 @@
                     });
                 }
             },
-            submitForm:function() {
+            submitForm: function () {
                 if (!$('#form1').formValid()) {
                     return false;
                 }
@@ -31,7 +31,7 @@
                 $.submitForm({
                     url: "/SystemManage/MenuButton/SubmitForm?keyValue=" + keyValue,
                     param: postData,
-                    success: function() {
+                    success: function () {
                         top.modulebutton.$("#grid").resetSelection();
                         top.modulebutton.$("#grid").trigger("reloadGrid");
                     }
@@ -58,7 +58,21 @@
                 <td class="formValue">
                     <input id="Event" name="Event" type="text" class="form-control" />
                 </td>
-                <th class="formTitle">连接</th>
+                <th class="formTitle">位置</th>
+                <td class="formValue">
+                    <select id="Location" name="Location" class="form-control required">
+                        <option value="">==请选择==</option>
+                        <option value="1">初始</option>
+                        <option value="2">选中</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">排序</th>
+                <td class="formValue">
+                    <input id="Sort" name="Sort" type="text" class="form-control required" />
+                </td>
+                <th class="formTitle">图标</th>
                 <td class="formValue">
                     <div class="input-group">
                         <input id="Icon" name="Icon" type="text" class="form-control">
@@ -69,12 +83,8 @@
                 </td>
             </tr>
             <tr>
-                <th class="formTitle">排序</th>
-                <td class="formValue">
-                    <input id="Sort" name="Sort" type="text" class="form-control required"/>
-                </td>
-                <th class="formTitle">图标</th>
-                <td class="formValue">
+                <th class="formTitle">有效</th>
+                <td class="formValue" colspan="3">
                     <div class="ckbox">
                         <input id="IsEnabled" name="IsEnabled" type="checkbox" checked="checked"><label for="IsEnabled">有效</label>
                     </div>

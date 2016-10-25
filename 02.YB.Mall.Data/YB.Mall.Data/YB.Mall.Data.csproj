@@ -64,49 +64,13 @@
     <Compile Include="Infrastructure\IDatabaseFactory.cs" />
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\201610121005419_rolemeun.cs" />
-    <Compile Include="Migrations\201610121005419_rolemeun.Designer.cs">
-      <DependentUpon>201610121005419_rolemeun.cs</DependentUpon>
+    <Compile Include="Migrations\201610250541451_删除菜单多余字段.cs" />
+    <Compile Include="Migrations\201610250541451_删除菜单多余字段.Designer.cs">
+      <DependentUpon>201610250541451_删除菜单多余字段.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201610200145032_menuicon.cs" />
-    <Compile Include="Migrations\201610200145032_menuicon.Designer.cs">
-      <DependentUpon>201610200145032_menuicon.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610200848247_role.cs" />
-    <Compile Include="Migrations\201610200848247_role.Designer.cs">
-      <DependentUpon>201610200848247_role.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610200850518_role1.cs" />
-    <Compile Include="Migrations\201610200850518_role1.Designer.cs">
-      <DependentUpon>201610200850518_role1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610200859580_role1659.cs" />
-    <Compile Include="Migrations\201610200859580_role1659.Designer.cs">
-      <DependentUpon>201610200859580_role1659.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610210705571_oragitionType.cs" />
-    <Compile Include="Migrations\201610210705571_oragitionType.Designer.cs">
-      <DependentUpon>201610210705571_oragitionType.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610240313485_menuinfo.cs" />
-    <Compile Include="Migrations\201610240313485_menuinfo.Designer.cs">
-      <DependentUpon>201610240313485_menuinfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610240323496_menuinfo1.cs" />
-    <Compile Include="Migrations\201610240323496_menuinfo1.Designer.cs">
-      <DependentUpon>201610240323496_menuinfo1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610240627220_removeStatus.cs" />
-    <Compile Include="Migrations\201610240627220_removeStatus.Designer.cs">
-      <DependentUpon>201610240627220_removeStatus.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610240802286_remark.cs" />
-    <Compile Include="Migrations\201610240802286_remark.Designer.cs">
-      <DependentUpon>201610240802286_remark.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610240914109_muneButton.cs" />
-    <Compile Include="Migrations\201610240914109_muneButton.Designer.cs">
-      <DependentUpon>201610240914109_muneButton.cs</DependentUpon>
+    <Compile Include="Migrations\201610250549205_Location.cs" />
+    <Compile Include="Migrations\201610250549205_Location.Designer.cs">
+      <DependentUpon>201610250549205_Location.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -149,38 +113,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610121005419_rolemeun.resx">
-      <DependentUpon>201610121005419_rolemeun.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201610250541451_删除菜单多余字段.resx">
+      <DependentUpon>201610250541451_删除菜单多余字段.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610200145032_menuicon.resx">
-      <DependentUpon>201610200145032_menuicon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610200848247_role.resx">
-      <DependentUpon>201610200848247_role.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610200850518_role1.resx">
-      <DependentUpon>201610200850518_role1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610200859580_role1659.resx">
-      <DependentUpon>201610200859580_role1659.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610210705571_oragitionType.resx">
-      <DependentUpon>201610210705571_oragitionType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610240313485_menuinfo.resx">
-      <DependentUpon>201610240313485_menuinfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610240323496_menuinfo1.resx">
-      <DependentUpon>201610240323496_menuinfo1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610240627220_removeStatus.resx">
-      <DependentUpon>201610240627220_removeStatus.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610240802286_remark.resx">
-      <DependentUpon>201610240802286_remark.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610240914109_muneButton.resx">
-      <DependentUpon>201610240914109_muneButton.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201610250549205_Location.resx">
+      <DependentUpon>201610250549205_Location.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

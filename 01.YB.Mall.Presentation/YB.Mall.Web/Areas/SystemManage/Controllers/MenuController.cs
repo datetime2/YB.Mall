@@ -37,7 +37,6 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
             {
                 Icon = menu.Icon,
                 MenuName = menu.MenuName,
-                IsButton = menu.IsButton,
                 IsEnabled = menu.IsEnabled,
                 IsMenu = menu.IsMenu,
                 MenuId = menu.MenuId,
@@ -53,6 +52,12 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         public JsonResult SubmitForm(MenuInfo menu, int? keyValue)
         {
             return menuService.SubmitForm(menu, keyValue) ? Success("操作成功") : Error("操作失败");
+        }
+
+        [HttpPost]
+        public JsonResult Remove(int? keyValue)
+        {
+            return menuService.Remove(s => s.MenuId == keyValue) ? Success("操作成功") : Error("操作失败");
         }
     }
 }

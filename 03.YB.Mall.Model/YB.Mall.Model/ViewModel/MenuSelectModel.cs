@@ -13,7 +13,7 @@ namespace YB.Mall.Model.ViewModel
             this.level = 0;
             this.isLeaf = false;
             this.parent = "0";
-            this.expanded = false;
+            this.expanded = true;
             this.loaded = true;
         }
         public int level { get; set; }

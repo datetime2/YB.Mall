@@ -223,9 +223,9 @@ $.deleteForm = function (options) {
         close: true
     };
     var options = $.extend(defaults, options);
-    if ($('[name=__RequestVerificationToken]').length > 0) {
-        options.param["__RequestVerificationToken"] = $('[name=__RequestVerificationToken]').val();
-    }
+    //if ($('[name=__RequestVerificationToken]').length > 0) {
+    //    options.param["__RequestVerificationToken"] = $('[name=__RequestVerificationToken]').val();
+    //}
     $.modalConfirm(options.prompt, function (r) {
         if (r) {
             $.loading(true, options.loading);

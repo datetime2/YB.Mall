@@ -11,5 +11,6 @@ namespace YB.Mall.Service
         jqGridPagerViewModel<MenuButtonInfo, dynamic> ButtonGrid(MenuButtonQueryModel query);
         MenuButtonInfo SingleButton(Expression<Func<MenuButtonInfo, bool>> where);
         bool SubmitForm(MenuButtonInfo button, int? keyValue);
+        bool Remove(Expression<Func<MenuButtonInfo, bool>> where);
     }
 }

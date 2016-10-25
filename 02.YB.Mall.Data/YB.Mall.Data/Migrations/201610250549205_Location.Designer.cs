@@ -7,13 +7,13 @@ namespace YB.Mall.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class menuinfo : IMigrationMetadata
+    public sealed partial class Location : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(menuinfo));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Location));
         
         string IMigrationMetadata.Id
         {
-            get { return "201610240313485_menuinfo"; }
+            get { return "201610250549205_Location"; }
         }
         
         string IMigrationMetadata.Source

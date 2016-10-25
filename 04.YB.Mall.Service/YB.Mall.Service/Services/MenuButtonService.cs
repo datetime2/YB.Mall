@@ -33,7 +33,8 @@ namespace YB.Mall.Service
                     ButtonName = s.ButtonName,
                     ElementId = s.ElementId,
                     Event = s.Event,
-                    IsEnabled = s.IsEnabled
+                    IsEnabled = s.IsEnabled,
+                    Location = s.Location
                 }),
                 size = grid.size,
                 page = grid.page,
@@ -48,14 +49,15 @@ namespace YB.Mall.Service
         public bool SubmitForm(MenuButtonInfo button, int? keyValue)
         {
             if (keyValue.HasValue)
-                return repository.Update(s => s.MenuId == keyValue, u => new MenuButtonInfo
+                return repository.Update(s => s.ButtonId == keyValue, u => new MenuButtonInfo
                 {
                     ButtonName = button.ButtonName,
                     Icon = button.Icon,
                     ElementId = button.ElementId,
                     Event = button.Event,
                     IsEnabled = button.IsEnabled,
-                    Sort = button.Sort
+                    Sort = button.Sort,
+                    Location = button.Location
                 });
             else
             {
@@ -63,6 +65,10 @@ namespace YB.Mall.Service
                 unitOfWork.SaveChanges();
                 return button.ButtonId > 0;
             }
+        }
+        public bool Remove(System.Linq.Expressions.Expression<Func<MenuButtonInfo, bool>> where)
+        {
+            return repository.Delete(where);
         }
     }
 }

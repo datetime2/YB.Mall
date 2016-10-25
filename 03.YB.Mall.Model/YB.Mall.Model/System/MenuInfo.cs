@@ -18,7 +18,6 @@ namespace YB.Mall.Model
         public string Target { get; set; }
         public int? Sort { get; set; }
         public bool IsMenu { get; set; }
-        public bool IsButton { get; set; }
         public bool IsEnabled { get; set; }
         public string Remark { get; set; }
         public DateTime? LastUpdTime { get; set; }
