@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using YB.Mall.Data.Infrastructure;
 using YB.Mall.Data.Repositories;
 using YB.Mall.Extend.Linq;
@@ -60,14 +62,33 @@ namespace YB.Mall.Service
                     RoleId = s.RoleId,
                     RoleName = s.RoleName,
                     AllowDelte = s.AllowDelte,
-                    Status = s.Status,
                     AllowEdit = s.AllowEdit,
-                    RoleType = ((RoleType) s.RoleType).ToDescription()
+                    RoleType = ((RoleType) s.RoleType).ToDescription(),
+                    OrganizeType = ((OrganizeType)s.OrganizeType).ToDescription(),
+                    IsEnabled = s.IsEnabled,
+                    Remark = s.Remark,
+                    CreateTime=s.CreateTime
                 }),
                 size = grid.size,
                 page = grid.page,
                 records = grid.records
             };
+        }
+
+
+        public bool Remove(System.Linq.Expressions.Expression<System.Func<RoleInfo, bool>> where)
+        {
+            return repository.Delete(where);
+        }
+
+        public bool SubmitForm(RoleInfo role, int? keyValue)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public RoleInfo InitForm(Expression<Func<RoleInfo, bool>> where)
+        {
+            return repository.Single(where);
         }
     }
 }

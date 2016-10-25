@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace YB.Mall.Model
@@ -17,6 +18,8 @@ namespace YB.Mall.Model
         public bool AllowEdit { get; set; }
         public RoleType RoleType { get; set; }
         public OrganizeType OrganizeType { get; set; }
+        public DateTime CreateTime { get; set; }
+        public bool IsEnabled { get; set; }
         public int Sort { get; set; }
         public string Remark { get; set; }
         public virtual ICollection<ManageInfo> ManageInfo { get; set; }

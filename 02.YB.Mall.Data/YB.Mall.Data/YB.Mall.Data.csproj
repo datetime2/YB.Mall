@@ -72,6 +72,10 @@
     <Compile Include="Migrations\201610250549205_Location.Designer.cs">
       <DependentUpon>201610250549205_Location.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610250837300_roleIndo-add-filed.cs" />
+    <Compile Include="Migrations\201610250837300_roleIndo-add-filed.Designer.cs">
+      <DependentUpon>201610250837300_roleIndo-add-filed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepository\IBrandRepository.cs" />
@@ -118,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610250549205_Location.resx">
       <DependentUpon>201610250549205_Location.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610250837300_roleIndo-add-filed.resx">
+      <DependentUpon>201610250837300_roleIndo-add-filed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

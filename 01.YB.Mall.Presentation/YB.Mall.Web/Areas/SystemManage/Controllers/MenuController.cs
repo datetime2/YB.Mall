@@ -32,7 +32,7 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         [HttpGet]
         public JsonResult InitForm(int keyValue)
         {
-            var menu = menuService.SingleMenu(keyValue);
+            var menu = menuService.InitForm(keyValue);
             return Json(new MenuInfo
             {
                 Icon = menu.Icon,

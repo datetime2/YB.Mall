@@ -25,6 +25,10 @@ namespace YB.Mall.Model.ViewModel
 
     public class TreeSelectModel
     {
+        public TreeSelectModel()
+        {
+            parentId = 0;
+        }
         public int id { get; set; }
         public string text { get; set; }
         public int parentId { get; set; }

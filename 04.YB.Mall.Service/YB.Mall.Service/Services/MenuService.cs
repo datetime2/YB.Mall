@@ -91,7 +91,7 @@ namespace YB.Mall.Service
             return tree;
         }
 
-        public MenuInfo SingleMenu(int menuId)
+        public MenuInfo InitForm(int menuId)
         {
             return repository.Single(s => s.MenuId.Equals(menuId));
         }

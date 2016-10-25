@@ -42,7 +42,7 @@ namespace YB.Mall.Service
             };
         }
 
-        public MenuButtonInfo SingleButton(System.Linq.Expressions.Expression<System.Func<MenuButtonInfo, bool>> where)
+        public MenuButtonInfo InitForm(System.Linq.Expressions.Expression<System.Func<MenuButtonInfo, bool>> where)
         {
             return repository.Single(where);
         }

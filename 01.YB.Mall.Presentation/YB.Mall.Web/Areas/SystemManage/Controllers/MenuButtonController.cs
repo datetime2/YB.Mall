@@ -26,7 +26,7 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         [HttpGet]
         public JsonResult InitForm(int? keyValue)
         {
-            var button = buttonService.SingleButton(s => s.ButtonId == keyValue);
+            var button = buttonService.InitForm(s => s.ButtonId == keyValue);
             return Json(new MenuButtonInfo
             {
                 ButtonId = button.ButtonId,
