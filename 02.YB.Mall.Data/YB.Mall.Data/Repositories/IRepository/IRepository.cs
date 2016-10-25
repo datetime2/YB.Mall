@@ -14,10 +14,35 @@ namespace YB.Mall.Data.Repositories
         T GetById(int id);
         IEnumerable<T> GetAll();
         IEnumerable<T> GetMany(Expression<Func<T, bool>> where);
+        /// <summary>
+        /// EF 原生语法
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         T Add(T entity);
+        /// <summary>
+        /// EF 原生语法
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         void Update(T entity);
+        /// <summary>
+        /// EF.Ext 语法
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         bool Update(Expression<Func<T, bool>> where, Expression<Func<T, T>> filed);
+        /// <summary>
+        /// EF 原生语法
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         void Delete(T entity);
+        /// <summary>
+        /// EF.Ext 语法
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         bool Delete(Expression<Func<T, bool>> predi);
         IQueryable<T> Query(Expression<Func<T, bool>> where);
         T Single(Expression<Func<T, bool>> where);

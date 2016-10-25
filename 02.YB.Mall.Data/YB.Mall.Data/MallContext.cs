@@ -13,6 +13,7 @@ namespace YB.Mall.Data
         public MallContext()
             : base("MallContext")
         {
+            //this.Configuration.ProxyCreationEnabled = false;
         }
         public DbSet<UserInfo> UserInfo { get; set; }
         public DbSet<OrderInfo> OrderInfo { get; set; }

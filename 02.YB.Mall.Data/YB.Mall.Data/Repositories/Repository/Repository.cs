@@ -45,6 +45,7 @@ namespace YB.Mall.Data.Repositories
             _dbset.Attach(entity);
             _dataContext.Entry(entity).State = EntityState.Modified;
         }
+        
         public virtual bool Update(Expression<Func<T, bool>> where, Expression<Func<T, T>> filed)
         {
             return _dbset.Where(where).Update(filed) > 0;
@@ -117,7 +118,7 @@ namespace YB.Mall.Data.Repositories
                 records = entities.Count(),
                 page = query.page.Value,
                 size = query.rows,
-                rows = query.sidx == null
+                rows = string.IsNullOrEmpty(query.sidx)
                     ? entities.Skip((query.page.Value - 1)*query.rows.Value).Take(query.rows.Value)
                     : (query.sord == "asc"
                         ? entities.OrderBy(query.sidx)

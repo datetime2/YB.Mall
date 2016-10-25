@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YB.Mall.Extend;
 
 namespace YB.Mall.Data.Infrastructure
 {
@@ -25,7 +27,23 @@ namespace YB.Mall.Data.Infrastructure
 
         public void SaveChanges()
         {
-            DbContext.SaveChanges();
+            try
+            {
+                DbContext.SaveChanges();
+            }
+            catch (DbEntityValidationException dbex)
+            {
+                var error = string.Empty;
+                foreach (var item2 in dbex.EntityValidationErrors.SelectMany(item => item.ValidationErrors))
+                {
+                    error = string.Format("{0}:{1}\r\n", item2.PropertyName, item2.ErrorMessage);
+                }
+                Log.Error(error);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
         }
     }
 }

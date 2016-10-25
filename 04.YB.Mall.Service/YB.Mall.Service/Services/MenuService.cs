@@ -116,7 +116,11 @@ namespace YB.Mall.Service
                     Remark = menu.Remark
                 });
             else
-                return repository.Add(menu).MenuId > 0;
+            {
+                repository.Add(menu);
+                unitOfWork.SaveChanges();
+                return menu.MenuId > 0;
+            }
         }
     }
 }

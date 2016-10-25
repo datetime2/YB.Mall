@@ -28,20 +28,31 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         {
             return Json(menuService.MenuTree(query), JsonRequestBehavior.AllowGet);
         }
+
         [HttpGet]
         public JsonResult InitForm(int keyValue)
         {
-            return Json(menuService.SingleMenu(keyValue), JsonRequestBehavior.AllowGet);
+            var menu = menuService.SingleMenu(keyValue);
+            return Json(new MenuInfo
+            {
+                Icon = menu.Icon,
+                MenuName = menu.MenuName,
+                IsButton = menu.IsButton,
+                IsEnabled = menu.IsEnabled,
+                IsMenu = menu.IsMenu,
+                MenuId = menu.MenuId,
+                ParentId = menu.ParentId,
+                UrlPath = menu.UrlPath,
+                Target = menu.Target,
+                Remark = menu.Remark,
+                Sort = menu.Sort
+            }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public JsonResult SubmitForm(MenuInfo menu, int? keyValue)
         {
-            var res = new JsonResult();
-            if (menuService.SubmitForm(menu, keyValue))
-                return Success("操作成功");
-            else
-                return Error("操作失败");
+            return menuService.SubmitForm(menu, keyValue) ? Success("操作成功") : Error("操作失败");
         }
     }
 }

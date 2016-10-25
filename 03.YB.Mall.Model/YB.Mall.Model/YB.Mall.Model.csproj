@@ -48,6 +48,7 @@
     <Compile Include="Product\CategoryInfo.cs" />
     <Compile Include="Product\ProductInfo.cs" />
     <Compile Include="QueryModel\BaseQueryModel.cs" />
+    <Compile Include="QueryModel\MenuButtonQueryModel.cs" />
     <Compile Include="QueryModel\MenuQueryModel.cs" />
     <Compile Include="QueryModel\PagerQueryModel.cs" />
     <Compile Include="QueryModel\RoleQueryModel.cs" />
