@@ -13,13 +13,15 @@ namespace YB.Mall.Service
 {
     public class RoleService : IRoleService
     {
-        private IRoleRepository repository;
-        private IMenuRepository menuRepository;
+        private readonly IRoleRepository repository;
+        private readonly IMenuRepository menuRepository;
+        private readonly IMenuButtonRepository buttonRepository;
         private IUnitOfWork unitOfWork;
-        public RoleService(IRoleRepository repository, IMenuRepository menuRepository, IUnitOfWork unitOfWork)
+        public RoleService(IRoleRepository repository, IMenuRepository menuRepository, IMenuButtonRepository buttonRepository, IUnitOfWork unitOfWork)
         {
             this.repository = repository;
             this.menuRepository = menuRepository;
+            this.buttonRepository = buttonRepository;
             this.unitOfWork = unitOfWork;
         }
 
@@ -63,19 +65,17 @@ namespace YB.Mall.Service
                     RoleName = s.RoleName,
                     AllowDelte = s.AllowDelte,
                     AllowEdit = s.AllowEdit,
-                    RoleType = ((RoleType) s.RoleType).ToDescription(),
+                    RoleType = ((RoleType)s.RoleType).ToDescription(),
                     OrganizeType = ((OrganizeType)s.OrganizeType).ToDescription(),
                     IsEnabled = s.IsEnabled,
                     Remark = s.Remark,
-                    CreateTime=s.CreateTime
+                    CreateTime = s.CreateTime
                 }),
                 size = grid.size,
                 page = grid.page,
                 records = grid.records
             };
         }
-
-
         public bool Remove(System.Linq.Expressions.Expression<System.Func<RoleInfo, bool>> where)
         {
             return repository.Delete(where);
@@ -83,12 +83,57 @@ namespace YB.Mall.Service
 
         public bool SubmitForm(RoleInfo role, int? keyValue)
         {
+            if (keyValue.HasValue)
+            {
+                repository.Update(s => s.RoleId == keyValue, u => new RoleInfo
+                {
+
+                });
+            }
             throw new System.NotImplementedException();
         }
 
         public RoleInfo InitForm(Expression<Func<RoleInfo, bool>> where)
         {
             return repository.Single(where);
+        }
+
+        public List<TreeViewModel> RoleAuthorize(int? roleId)
+        {
+            var sysMenu = menuRepository.GetMany(s => s.IsEnabled);
+            var sysButton = buttonRepository.GetMany(s => s.IsEnabled);
+            //var role = repository.Single(s => s.RoleId == roleId);
+            //tree.AddRange(role.MenuButtonInfo.Select(s => new TreeViewModel
+            //{
+
+            //}));
+            return sysMenu.Where(s => s.ParentId == 0).Select(item => new TreeViewModel
+            {
+                id = item.MenuId + "",
+                value = "",
+                parentnodes = "0",
+                checkstate = 0,
+                img = item.Icon,
+                text = item.MenuName,
+                ChildNodes = sysMenu.Where(s => s.ParentId == item.MenuId).Select(items => new TreeViewModel
+                {
+                    id = items.MenuId + "",
+                    value = "",
+                    parentnodes = items.ParentId + "",
+                    checkstate = 0,
+                    img = items.Icon,
+                    text = items.MenuName,
+                    ChildNodes = sysButton.Where(s => s.MenuId == items.MenuId).Select(button => new TreeViewModel
+                    {
+                        id = button.ButtonId + "",
+                        value = "",
+                        parentnodes = items.MenuId + "",
+                        checkstate = 0,
+                        img = button.Icon,
+                        text = button.ButtonName,
+                    }).ToList()
+                }).ToList()
+            }).ToList();
         }
     }
 }

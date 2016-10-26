@@ -8,8 +8,9 @@ namespace YB.Mall.Model
     {
         public RoleInfo()
         {
-            this.ManageInfo=new HashSet<ManageInfo>();
-            this.MenuInfo=new HashSet<MenuInfo>();
+            this.ManageInfo = new HashSet<ManageInfo>();
+            this.MenuInfo = new HashSet<MenuInfo>();
+            this.MenuButtonInfo = new HashSet<MenuButtonInfo>();
         }
         public int RoleId { get; set; }
         public string RoleName { get; set; }
@@ -22,7 +23,9 @@ namespace YB.Mall.Model
         public bool IsEnabled { get; set; }
         public int Sort { get; set; }
         public string Remark { get; set; }
+        public DateTime LastUpdTime { get; set; }
         public virtual ICollection<ManageInfo> ManageInfo { get; set; }
         public virtual ICollection<MenuInfo> MenuInfo { get; set; }
+        public virtual ICollection<MenuButtonInfo> MenuButtonInfo { get; set; }
     }
 }

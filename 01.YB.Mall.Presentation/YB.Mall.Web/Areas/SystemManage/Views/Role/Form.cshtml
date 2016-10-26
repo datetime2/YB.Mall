@@ -42,7 +42,7 @@
                 $("#permissionTree").treeview({
                     height: 444,
                     showcheck: true,
-                    url: "/SystemManage/RoleAuthorize/GetPermissionTree",
+                    url: "/SystemManage/Role/RoleAuthorize",
                     param: { roleId: keyValue }
                 });
             },
@@ -148,7 +148,7 @@
         <div class="form-button" id="wizard-actions">
             <a id="btn_last" disabled class="btn btn-default btn-prev">上一步</a>
             <a id="btn_next" class="btn btn-default btn-next">下一步</a>
-            <a id="btn_finish" class="btn btn-default" style="display: none;" onclick="submitForm()">完成</a>
+            <a id="btn_finish" class="btn btn-default" style="display: none;" onclick="$.roleForm.submitForm()">完成</a>
         </div>
     </div>
 </form>

@@ -377,11 +377,12 @@
             ul.prev().removeClass("bbit-tree-node-loading");
         }
         function asnyloadc(pnode, isAsync, callback) {
+            var param;
             if (dfop.url) {
                 if (pnode && pnode != null)
-                    var param = builparam(pnode);
+                    param = builparam(pnode);
                 if (dfop.param != null) {
-                    var param = dfop.param
+                    param = dfop.param;
                 }
                 $.ajax({
                     type: dfop.method,
@@ -390,7 +391,8 @@
                     async: isAsync,
                     dataType: dfop.datatype,
                     success: callback,
-                    error: function (e) { dialogMsg("·þÎñ¶ËÎ´ÏìÓ¦¡£", -1); }
+                    error: function (e) {
+                    }
                 });
             }
         }

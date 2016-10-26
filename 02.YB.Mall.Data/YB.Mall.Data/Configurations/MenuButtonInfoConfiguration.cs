@@ -17,6 +17,12 @@ namespace YB.Mall.Data.Configurations
             this.Property(s => s.Event).IsRequired().HasMaxLength(50);
             this.Property(s => s.Icon).IsRequired().HasMaxLength(50);
             this.HasRequired(s => s.MenuInfo).WithMany(s => s.MenuButtonInfo).HasForeignKey(s => s.MenuId);
+            this.HasMany(s => s.RoleInfo).WithMany(s => s.MenuButtonInfo).Map(rm =>
+            {
+                rm.MapLeftKey("RoleId");
+                rm.MapRightKey("ButtonId");
+                rm.ToTable("T_RoleMenuButtonInfo");
+            });
             this.ToTable("T_MenuButtonInfo");
         }
     }

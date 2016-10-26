@@ -16,11 +16,6 @@ namespace YB.Mall.Web.Controllers
         {
             this.mangService = _mangService;
         }
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         [HttpPost]
         public JsonResult ManageLogin(string loginname, string password, string code)
         {

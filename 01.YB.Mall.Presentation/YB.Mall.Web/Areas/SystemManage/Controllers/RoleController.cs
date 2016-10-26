@@ -18,6 +18,11 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         {
             this.roleService = _roleService;
         }
+        /// <summary>
+        /// 列表加载
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         [HttpGet]
         public JsonResult RoleGrid(RoleQueryModel query)
         {
@@ -29,13 +34,20 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         {
             return Json(null, JsonRequestBehavior.AllowGet);
         }
-
+        /// <summary>
+        /// 表单加载
+        /// </summary>
+        /// <param name="keyValue"></param>
+        /// <returns></returns>
         [HttpGet]
         public JsonResult InitForm(int? keyValue)
         {
             return Json(roleService.InitForm(s => s.RoleId == keyValue), JsonRequestBehavior.AllowGet);
         }
-
+        /// <summary>
+        /// 角色类型下拉框
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public JsonResult InitRoleType()
         {
@@ -45,15 +57,28 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
                 text = s.Key
             }), JsonRequestBehavior.AllowGet);
         }
-
+        /// <summary>
+        /// 机构下拉框
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public JsonResult InitOrganizeType()
         {
             return Json(EnumHelper.ToDescriptionDictionary<OrganizeType>().Select(s => new TreeSelectModel
             {
                 id = s.Value,
-                text =  s.Key
+                text = s.Key
             }), JsonRequestBehavior.AllowGet);
         }
+        /// <summary>
+        /// 角色权限树
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult RoleAuthorize(int? roleId)
+        {
+            return Json(roleService.RoleAuthorize(roleId), JsonRequestBehavior.AllowGet);
+        } 
     }
 }

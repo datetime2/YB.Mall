@@ -4,6 +4,10 @@ namespace YB.Mall.Model
 {
     public class MenuButtonInfo
     {
+        public MenuButtonInfo()
+        {
+            this.RoleInfo=new HashSet<RoleInfo>();
+        }
         public int ButtonId { get; set; }
         public int MenuId { get; set; }
         public string ButtonName { get; set; }
@@ -17,5 +21,6 @@ namespace YB.Mall.Model
         /// </summary>
         public int Location { get; set; }
         public virtual MenuInfo MenuInfo { get; set; }
+        public virtual ICollection<RoleInfo> RoleInfo { get; set; }
     }
 }

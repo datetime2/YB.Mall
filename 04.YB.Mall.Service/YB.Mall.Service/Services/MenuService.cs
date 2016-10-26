@@ -43,7 +43,7 @@ namespace YB.Mall.Service
                     Target = item.Target,
                     IsMenu = item.IsMenu,
                     IsEnabled = item.IsEnabled,
-                    Remark = item.Remark
+                    Remark = item.Remark,
                 });
                 tree.AddRange(grid.Where(s => s.ParentId == item.MenuId).Select(items => new TreeGridModel
                 {

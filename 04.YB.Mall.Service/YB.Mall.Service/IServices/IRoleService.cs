@@ -13,5 +13,6 @@ namespace YB.Mall.Service
         bool Remove(Expression<Func<RoleInfo, bool>> where);
         bool SubmitForm(RoleInfo role, int? keyValue);
         RoleInfo InitForm(Expression<Func<RoleInfo, bool>> where);
+        List<TreeViewModel> RoleAuthorize(int? roleId);
     }
 }
