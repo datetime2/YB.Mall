@@ -86,14 +86,17 @@ namespace YB.Mall.Service
             var flag = false;
             if (keyValue.HasValue)
             {
-                if (menuIds.Any())
+                var enumerable = menuIds as int[] ?? menuIds.ToArray();
+                if (enumerable.Any())
                     rmenuRepository.Delete(s => s.RoleId == keyValue);
+                role.RoleId = keyValue.Value;
+                role.LastUpdTime = DateTime.Now;
                 repository.Update(role);
-                rmenuRepository.Add(menuIds.Select(s => new RoleMenu
+                flag = rmenuRepository.Add(enumerable.Select(s => new RoleMenu
                 {
                     RoleId = keyValue.Value,
                     MenuId = s
-                }));
+                })).Any();
                 unitOfWork.SaveChanges();
             }
             else
@@ -119,37 +122,38 @@ namespace YB.Mall.Service
         public List<TreeViewModel> RoleAuthorize(int? roleId)
         {
             var sysMenu = menuRepository.GetMany(s => s.IsEnabled);
-            //var role = repository.Single(s => s.RoleId == roleId);
-            //tree.AddRange(role.MenuButtonInfo.Select(s => new TreeViewModel
-            //{
-
-            //}));
-            return sysMenu.Where(s => s.ParentId == 0).Select(item => new TreeViewModel
+            var roleAuthorize = rmenuRepository.GetMany(s => s.RoleId == roleId);
+            var menuInfos = sysMenu as MenuInfo[] ?? sysMenu.ToArray();
+            return menuInfos.Where(s => s.ParentId == 0).Select(item =>
             {
-                id = item.MenuId + "",
-                value = "",
-                parentnodes = "0",
-                checkstate = 0,
-                img = item.Icon,
-                text = item.MenuName,
-                ChildNodes = sysMenu.Where(s => s.ParentId == item.MenuId).Select(items => new TreeViewModel
+                var roleMenus = roleAuthorize as RoleMenu[] ?? roleAuthorize.ToArray();
+                return new TreeViewModel
                 {
-                    id = items.MenuId + "",
+                    id = item.MenuId + "",
                     value = "",
-                    parentnodes = items.ParentId + "",
-                    checkstate = 0,
-                    img = items.Icon,
-                    text = items.MenuName,
-                    ChildNodes = sysMenu.Where(s => s.ParentId == items.MenuId).Select(button => new TreeViewModel
+                    parentnodes = "0",
+                    checkstate = roleMenus.Any(t => t.MenuId == item.MenuId) ? 1 : 0,
+                    img = item.Icon,
+                    text = item.MenuName,
+                    ChildNodes = menuInfos.Where(s => s.ParentId == item.MenuId).Select(items => new TreeViewModel
                     {
-                        id = button.MenuId + "",
+                        id = items.MenuId + "",
                         value = "",
-                        parentnodes = button.ParentId + "",
-                        checkstate = 0,
-                        img = button.Icon,
-                        text = button.MenuName
+                        parentnodes = items.ParentId + "",
+                        checkstate = roleMenus.Any(s => s.MenuId == items.MenuId) ? 1 : 0,
+                        img = items.Icon,
+                        text = items.MenuName,
+                        ChildNodes = menuInfos.Where(s => s.ParentId == items.MenuId).Select(button => new TreeViewModel
+                        {
+                            id = button.MenuId + "",
+                            value = "",
+                            parentnodes = button.ParentId + "",
+                            checkstate = roleMenus.Any(s => s.MenuId == button.MenuId) ? 1 : 0,
+                            img = button.Icon,
+                            text = button.MenuName
+                        }).ToList()
                     }).ToList()
-                }).ToList()
+                };
             }).ToList();
         }
     }

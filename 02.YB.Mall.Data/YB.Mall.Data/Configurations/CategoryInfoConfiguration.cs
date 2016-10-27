@@ -13,6 +13,5 @@ namespace YB.Mall.Data.Configurations
                 .Property(s => s.CategoryId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
-
     }
 }
