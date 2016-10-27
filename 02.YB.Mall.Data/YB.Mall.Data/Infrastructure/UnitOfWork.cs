@@ -4,7 +4,7 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using YB.Mall.Extend;
+using YB.Mall.Extend.Log;
 
 namespace YB.Mall.Data.Infrastructure
 {

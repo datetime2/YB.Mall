@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using YB.Mall.Core;
 using YB.Mall.Data.Infrastructure;
 using YB.Mall.Data.Repositories;
 using YB.Mall.Extend.Linq;
@@ -121,9 +122,16 @@ namespace YB.Mall.Service
         }
         public List<TreeViewModel> RoleAuthorize(int? roleId)
         {
-            var sysMenu = menuRepository.GetMany(s => s.IsEnabled);
+            IEnumerable<MenuInfo> cacheMenu;
+            if (Cache.Get(CacheKeyCollection.SytemMenu) != null)
+                cacheMenu = Cache.Get<IEnumerable<MenuInfo>>(CacheKeyCollection.SytemMenu);
+            else
+            {
+                cacheMenu = menuRepository.GetMany(s => s.IsEnabled);
+                Cache.Insert(CacheKeyCollection.SytemMenu, cacheMenu, 120);
+            }
             var roleAuthorize = rmenuRepository.GetMany(s => s.RoleId == roleId);
-            var menuInfos = sysMenu as MenuInfo[] ?? sysMenu.ToArray();
+            var menuInfos = cacheMenu as MenuInfo[] ?? cacheMenu.ToArray();
             return menuInfos.Where(s => s.ParentId == 0).Select(item =>
             {
                 var roleMenus = roleAuthorize as RoleMenu[] ?? roleAuthorize.ToArray();

@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\SystemManage\Controllers\ManageController.cs" />
     <Compile Include="Areas\SystemManage\Controllers\MenuController.cs" />
     <Compile Include="Areas\SystemManage\Controllers\RoleController.cs" />
     <Compile Include="Areas\SystemManage\SystemManageAreaRegistration.cs" />
@@ -373,6 +374,8 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Plugins\Cache\YB.Mall.Plugin.NetCache.dll" />
+    <Content Include="Plugins\Cache\YB.Mall.Plugin.RedisCache.dll" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
@@ -400,6 +403,8 @@
     <Content Include="Areas\SystemManage\Views\Menu\Form.cshtml" />
     <Content Include="Areas\SystemManage\Views\Role\Form.cshtml" />
     <Content Include="Areas\SystemManage\Views\Menu\Detail.cshtml" />
+    <Content Include="Areas\SystemManage\Views\Manage\Index.cshtml" />
+    <Content Include="Areas\SystemManage\Views\Manage\Form.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -457,6 +462,10 @@
     <ProjectReference Include="..\..\04.YB.Mall.Service\YB.Mall.Service\YB.Mall.Service.csproj">
       <Project>{05c49278-e126-4348-b04e-4bf4a8eef213}</Project>
       <Name>YB.Mall.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\05.YB.Mall.Extend\YB.Mall.Core\YB.Mall.Core.csproj">
+      <Project>{3f2d5bf4-62bd-4cbf-a7db-6562558828d0}</Project>
+      <Name>YB.Mall.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\05.YB.Mall.Extend\YB.Mall.Extend\YB.Mall.Extend.csproj">
       <Project>{a0c3c519-2ddc-4208-9ccd-918fbf9cecdd}</Project>
