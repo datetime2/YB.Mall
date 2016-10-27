@@ -19,7 +19,27 @@ namespace YB.Mall.Model
         [Description("业务")]
         Business
     }
-
+    /// <summary>
+    /// 权限类型
+    /// </summary>
+    public enum AuthorizeType
+    {
+        /// <summary>
+        /// 无
+        /// </summary>
+        [Description("无")]
+        None,
+        /// <summary>
+        /// 菜单
+        /// </summary>
+        [Description("菜单")]
+        Menu,
+        /// <summary>
+        /// 按钮
+        /// </summary>
+        [Description("按钮")]
+        Button
+    }
     /// <summary>
     /// 机构类型
     /// </summary>
@@ -55,4 +75,6 @@ namespace YB.Mall.Model
         [Description("商品部")]
         Product
     }    
+
+
 }

@@ -7,8 +7,7 @@ namespace YB.Mall.Model
     {
         public MenuInfo()
         {
-            this.RoleInfo = new HashSet<RoleInfo>();
-            this.MenuButtonInfo = new HashSet<MenuButtonInfo>();
+            this.RoleMenu = new HashSet<RoleMenu>();
         }
         public int MenuId { get; set; }
         public int ParentId { get; set; }
@@ -16,12 +15,13 @@ namespace YB.Mall.Model
         public string Icon { get; set; }
         public string UrlPath { get; set; }
         public string Target { get; set; }
+        public string ElementId { get; set; }
+        public string Event { get; set; }
         public int? Sort { get; set; }
-        public bool IsMenu { get; set; }
+        public AuthorizeType MenuType { get; set; }
         public bool IsEnabled { get; set; }
         public string Remark { get; set; }
         public DateTime? LastUpdTime { get; set; }
-        public virtual ICollection<RoleInfo> RoleInfo { get; set; }
-        public virtual ICollection<MenuButtonInfo> MenuButtonInfo { get; set; }
+        public virtual ICollection<RoleMenu> RoleMenu { get; set; }
     }
 }

@@ -24,9 +24,7 @@ namespace YB.Mall.Data
         public DbSet<RoleInfo> RoleInfo { get; set; }
         public DbSet<ManageInfo> ManageInfo { get; set; }
         public DbSet<MenuInfo> MenuInfo { get; set; }
-        public DbSet<MenuButtonInfo> MenuButtonInfo { get; set; }
-
-
+        public DbSet<RoleMenu> RoleMenu { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new UserInfoConfiguration());
@@ -38,12 +36,10 @@ namespace YB.Mall.Data
             modelBuilder.Configurations.Add(new RoleInfoConfiguration());
             modelBuilder.Configurations.Add(new ManageInfoConfiguration());
             modelBuilder.Configurations.Add(new MenuInfoConfiguration());
-            modelBuilder.Configurations.Add(new MenuButtonInfoConfiguration());
-
+            modelBuilder.Configurations.Add(new RoleMenuConfigruation());
         }
     }
     public class MallDbInitializer : DropCreateDatabaseIfModelChanges<MallContext>
     {
-
     }
 }

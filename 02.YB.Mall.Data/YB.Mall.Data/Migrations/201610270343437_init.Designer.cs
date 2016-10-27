@@ -7,13 +7,13 @@ namespace YB.Mall.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class roleIndoaddfiled : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(roleIndoaddfiled));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201610250837300_roleIndo-add-filed"; }
+            get { return "201610270343437_init"; }
         }
         
         string IMigrationMetadata.Source

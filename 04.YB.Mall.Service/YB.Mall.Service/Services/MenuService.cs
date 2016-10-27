@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using YB.Mall.Data.Infrastructure;
 using YB.Mall.Data.Repositories;
+using YB.Mall.Extend.Helper;
 using YB.Mall.Extend.Linq;
 using YB.Mall.Model;
 using YB.Mall.Model.QueryModel;
@@ -28,44 +29,37 @@ namespace YB.Mall.Service
                 predicate = predicate.And(s => s.MenuName.Contains(query.keyword));
             var grid = repository.GetMany(predicate);
             var tree = new List<TreeGridModel>();
-            foreach (var item in grid.Where(s => s.ParentId == 0))
+            InitTree(0, grid, tree);
+            select.rows = tree;
+            return select;
+        }
+
+        private void InitTree(int parentId, IEnumerable<MenuInfo> data, List<TreeGridModel> tree)
+        {
+            var menuInfos = data as IList<MenuInfo> ?? data.ToList();
+            var root = menuInfos.Where(s => s.ParentId == parentId);
+            foreach (var item in root)
             {
                 tree.Add(new TreeGridModel
                 {
-                    level = 0,
-                    isLeaf = false,
-                    parent = "0",
+                    level = item.ParentId == 0 ? 0 : 1,
+                    isLeaf = !data.Any(s => s.ParentId == item.MenuId),
+                    parent = item.ParentId + "",
                     MenuId = item.MenuId,
                     ParentId = item.ParentId,
                     UrlPath = item.UrlPath,
                     Icon = item.Icon,
                     MenuName = item.MenuName,
                     Target = item.Target,
-                    IsMenu = item.IsMenu,
                     IsEnabled = item.IsEnabled,
                     Remark = item.Remark,
+                    ElementId = item.ElementId,
+                    Event = item.Event,
+                    MenuType = item.MenuType.ToDescription()
                 });
-                tree.AddRange(grid.Where(s => s.ParentId == item.MenuId).Select(items => new TreeGridModel
-                {
-                    level = 1,
-                    isLeaf = true,
-                    parent = items.ParentId + "",
-                    MenuId = items.MenuId,
-                    ParentId = items.ParentId,
-                    UrlPath = items.UrlPath,
-                    Icon = items.Icon,
-                    MenuName = items.MenuName,
-                    Target = items.Target,
-                    IsMenu = items.IsMenu,
-                    IsEnabled = items.IsEnabled,
-                    Remark = items.Remark
-                }));
+                InitTree(item.MenuId, menuInfos, tree);
             }
-            select.rows = tree;
-            return select;
         }
-
-
         public List<TreeSelectModel> MenuTree(MenuQueryModel query)
         {
             var tree = new List<TreeSelectModel>();
@@ -103,14 +97,16 @@ namespace YB.Mall.Service
                 {
                     MenuName = menu.MenuName,
                     Icon = menu.Icon,
-                    IsMenu = menu.IsMenu,
                     UrlPath = menu.UrlPath,
                     IsEnabled = menu.IsEnabled,
                     ParentId = menu.ParentId,
                     LastUpdTime = DateTime.Now,
                     Target = menu.Target,
                     Sort = menu.Sort,
-                    Remark = menu.Remark
+                    Remark = menu.Remark,
+                    ElementId = menu.ElementId,
+                    Event = menu.Event,
+                    MenuType = menu.MenuType
                 });
             else
             {

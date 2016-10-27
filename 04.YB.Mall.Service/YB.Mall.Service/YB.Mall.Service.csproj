@@ -42,20 +42,20 @@
     <Compile Include="IServices\IBrandService.cs" />
     <Compile Include="IServices\ICategoryService.cs" />
     <Compile Include="IServices\IManageService.cs" />
-    <Compile Include="IServices\IMenuButtonService.cs" />
     <Compile Include="IServices\IMenuService.cs" />
     <Compile Include="IServices\IOrderService.cs" />
     <Compile Include="IServices\IProductService.cs" />
+    <Compile Include="IServices\IRoleMenuService.cs" />
     <Compile Include="IServices\IRoleService.cs" />
     <Compile Include="IServices\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BrandService.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\ManageService.cs" />
-    <Compile Include="Services\MenuButtonService.cs" />
     <Compile Include="Services\MenuService.cs" />
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Services\RoleMenuService.cs" />
     <Compile Include="Services\RoleService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>

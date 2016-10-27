@@ -21,6 +21,12 @@ namespace YB.Mall.Data.Repositories
         /// <returns></returns>
         T Add(T entity);
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        IEnumerable<T> Add(IEnumerable<T> entity);
+        /// <summary>
         /// EF 原生语法
         /// </summary>
         /// <param name="entity"></param>

@@ -34,6 +34,7 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         {
             return Json(null, JsonRequestBehavior.AllowGet);
         }
+
         /// <summary>
         /// 表单加载
         /// </summary>
@@ -42,8 +43,19 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         [HttpGet]
         public JsonResult InitForm(int? keyValue)
         {
-            return Json(roleService.InitForm(s => s.RoleId == keyValue), JsonRequestBehavior.AllowGet);
+            var role = roleService.InitForm(s => s.RoleId == keyValue);
+            return Json(new RoleInfo
+            {
+                RoleName = role.RoleName,
+                RoleType = role.RoleType,
+                OrganizeType = role.OrganizeType,
+                IsEnabled = role.IsEnabled,
+                AllowDelte = role.AllowDelte,
+                AllowEdit = role.AllowEdit,
+                Remark = role.Remark
+            }, JsonRequestBehavior.AllowGet);
         }
+
         /// <summary>
         /// 角色类型下拉框
         /// </summary>
@@ -79,6 +91,15 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         public JsonResult RoleAuthorize(int? roleId)
         {
             return Json(roleService.RoleAuthorize(roleId), JsonRequestBehavior.AllowGet);
-        } 
+        }
+        /// <summary>
+        /// 表单保存
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult SubmitForm(RoleInfo role,string permissionIds,int?keyValue)
+        {
+            return roleService.SubmitForm(role,permissionIds.Split(',').Select(int.Parse), keyValue) ? Success("操作成功") : Error("操作失败");
+        }
     }
 }

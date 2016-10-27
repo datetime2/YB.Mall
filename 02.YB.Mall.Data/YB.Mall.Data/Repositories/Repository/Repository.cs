@@ -18,7 +18,7 @@ namespace YB.Mall.Data.Repositories
     public abstract class Repository<T> where T : class, new()
     {
         private MallContext _dataContext;
-        private readonly IDbSet<T> _dbset;
+        private readonly DbSet<T> _dbset;
         protected Repository(IDatabaseFactory databaseFactory)
         {
             DatabaseFactory = databaseFactory;
@@ -40,6 +40,13 @@ namespace YB.Mall.Data.Repositories
             _dbset.Add(entity);
             return entity;
         }
+
+        public virtual IEnumerable<T> Add(IEnumerable<T> entity)
+        {
+            _dbset.AddRange(entity);
+            return entity;
+        }
+
         public virtual void Update(T entity)
         {
             _dbset.Attach(entity);

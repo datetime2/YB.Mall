@@ -12,5 +12,8 @@
         public bool IsButton { get; set; }
         public bool IsEnabled { get; set; }
         public string Remark { get; set; }
+        public string ElementId { get; set; }
+        public string Event { get; set; }
+        public string MenuType { get; set; }
     }
 }

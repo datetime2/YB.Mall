@@ -18,6 +18,9 @@
                 $("#ParentId").bindSelect({
                     url: "/SystemManage/Menu/InitTree"
                 });
+                $("#MenuType").bindSelect({
+                    url: "/SystemManage/Menu/InitMenuType"
+                });
             },
             initForm: function () {
                 $.ajax({
@@ -93,21 +96,29 @@
                     </td>
                     <th class="formTitle">排序</th>
                     <td class="formValue">
-                        <input id="Sort" name="Sort" type="text" class="form-control required" placeholder="请输入排序" />
+                        <input id="Sort" name="Sort" type="number" class="form-control required" placeholder="请输入排序" />
                     </td>
                 </tr>
                 <tr>
-                    <th class="formTitle" style="height: 35px;">选项</th>
-                    <td class="formValue" colspan="3" style="padding-top: 1px;">
-                        <div class="ckbox">
-                            <input id="IsMenu" name="F_IsMenu" type="checkbox"><label for="IsMenu">菜单</label>
-                        </div>
-                        <div class="ckbox">
-                            <input id="IsButton" name="IsButton" type="checkbox"><label for="IsButton">按钮</label>
-                        </div>
+                    <th class="formTitle">类型</th>
+                    <td class="formValue">
+                        <select id="MenuType" name="MenuType" class="form-control required"></select>
+                    </td>
+                    <th class="formTitle" style="height: 35px;">有效</th>
+                    <td class="formValue" style="padding-top: 1px;">
                         <div class="ckbox">
                             <input id="IsEnabled" name="IsEnabled" type="checkbox" checked="checked"><label for="IsEnabled">有效</label>
                         </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle">元素</th>
+                    <td class="formValue">
+                        <input id="ElementId" name="ElementId" type="text" class="form-control" placeholder="按钮请输入元素编号" />
+                    </td>
+                    <th class="formTitle">事件</th>
+                    <td class="formValue">
+                        <input id="Event" name="Event" type="text" class="form-control" placeholder="按钮请输入事件" />
                     </td>
                 </tr>
                 <tr>
@@ -115,7 +126,7 @@
                         描述
                     </th>
                     <td class="formValue" colspan="3">
-                        <textarea id="Remark" name="Remark" class="form-control" style="height: 100px;"></textarea>
+                        <textarea id="Remark" name="Remark" class="form-control" style="height: 50px;"></textarea>
                     </td>
                 </tr>
             </table>

@@ -16,7 +16,7 @@ namespace YB.Mall.Web
             Bootstrapper.Configure();
             AreaRegistration.RegisterAllAreas();
             //数据库自动映射
-            Database.SetInitializer(new MallDbInitializer());
+            //Database.SetInitializer(new MallDbInitializer());
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

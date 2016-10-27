@@ -15,16 +15,18 @@ namespace YB.Mall.Service
     {
         private readonly IRoleRepository repository;
         private readonly IMenuRepository menuRepository;
-        private readonly IMenuButtonRepository buttonRepository;
+        private readonly IRoleMenuRepository rmenuRepository;
         private IUnitOfWork unitOfWork;
-        public RoleService(IRoleRepository repository, IMenuRepository menuRepository, IMenuButtonRepository buttonRepository, IUnitOfWork unitOfWork)
+        public RoleService(IRoleRepository repository,
+            IMenuRepository menuRepository,
+            IRoleMenuRepository rmenuRepository,
+            IUnitOfWork unitOfWork)
         {
             this.repository = repository;
             this.menuRepository = menuRepository;
-            this.buttonRepository = buttonRepository;
+            this.rmenuRepository = rmenuRepository;
             this.unitOfWork = unitOfWork;
         }
-
         public List<RoleMenuViewModel> RoleMenu(int? roleId)
         {
             var grid = menuRepository.Query(s => s.IsEnabled);
@@ -50,7 +52,6 @@ namespace YB.Mall.Service
             }
             return list;
         }
-
         public jqGridPagerViewModel<RoleInfo, dynamic> RoleGrid(RoleQueryModel query)
         {
             var predicate = PredicateBuilderUtility.True<RoleInfo>();
@@ -76,32 +77,48 @@ namespace YB.Mall.Service
                 records = grid.records
             };
         }
-        public bool Remove(System.Linq.Expressions.Expression<System.Func<RoleInfo, bool>> where)
+        public bool Remove(Expression<Func<RoleInfo, bool>> where)
         {
             return repository.Delete(where);
         }
-
-        public bool SubmitForm(RoleInfo role, int? keyValue)
+        public bool SubmitForm(RoleInfo role, IEnumerable<int> menuIds, int? keyValue)
         {
+            var flag = false;
             if (keyValue.HasValue)
             {
-                repository.Update(s => s.RoleId == keyValue, u => new RoleInfo
+                if (menuIds.Any())
+                    rmenuRepository.Delete(s => s.RoleId == keyValue);
+                repository.Update(role);
+                rmenuRepository.Add(menuIds.Select(s => new RoleMenu
                 {
-
-                });
+                    RoleId = keyValue.Value,
+                    MenuId = s
+                }));
+                unitOfWork.SaveChanges();
             }
-            throw new System.NotImplementedException();
+            else
+            {
+                role.CreateTime = DateTime.Now;
+                role.LastUpdTime = DateTime.Now;
+                repository.Add(role);
+                unitOfWork.SaveChanges();
+                rmenuRepository.Add(menuIds.Select(s => new RoleMenu
+                {
+                    RoleId = role.RoleId,
+                    MenuId = s
+                }));
+                unitOfWork.SaveChanges();
+                flag = role.RoleId > 0;
+            }
+            return flag;
         }
-
         public RoleInfo InitForm(Expression<Func<RoleInfo, bool>> where)
         {
             return repository.Single(where);
         }
-
         public List<TreeViewModel> RoleAuthorize(int? roleId)
         {
             var sysMenu = menuRepository.GetMany(s => s.IsEnabled);
-            var sysButton = buttonRepository.GetMany(s => s.IsEnabled);
             //var role = repository.Single(s => s.RoleId == roleId);
             //tree.AddRange(role.MenuButtonInfo.Select(s => new TreeViewModel
             //{
@@ -123,14 +140,14 @@ namespace YB.Mall.Service
                     checkstate = 0,
                     img = items.Icon,
                     text = items.MenuName,
-                    ChildNodes = sysButton.Where(s => s.MenuId == items.MenuId).Select(button => new TreeViewModel
+                    ChildNodes = sysMenu.Where(s => s.ParentId == items.MenuId).Select(button => new TreeViewModel
                     {
-                        id = button.ButtonId + "",
+                        id = button.MenuId + "",
                         value = "",
-                        parentnodes = items.MenuId + "",
+                        parentnodes = button.ParentId + "",
                         checkstate = 0,
                         img = button.Icon,
-                        text = button.ButtonName,
+                        text = button.MenuName
                     }).ToList()
                 }).ToList()
             }).ToList();

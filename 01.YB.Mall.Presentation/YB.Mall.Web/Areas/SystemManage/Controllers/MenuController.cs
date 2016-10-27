@@ -4,8 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using YB.Mall.Extend;
+using YB.Mall.Extend.Helper;
 using YB.Mall.Model;
 using YB.Mall.Model.QueryModel;
+using YB.Mall.Model.ViewModel;
 using YB.Mall.Service;
 using YB.Mall.Web.Controllers;
 
@@ -38,13 +40,14 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
                 Icon = menu.Icon,
                 MenuName = menu.MenuName,
                 IsEnabled = menu.IsEnabled,
-                IsMenu = menu.IsMenu,
                 MenuId = menu.MenuId,
                 ParentId = menu.ParentId,
                 UrlPath = menu.UrlPath,
                 Target = menu.Target,
                 Remark = menu.Remark,
-                Sort = menu.Sort
+                Sort = menu.Sort,
+                ElementId = menu.ElementId,
+                Event = menu.Event
             }, JsonRequestBehavior.AllowGet);
         }
 
@@ -58,6 +61,19 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         public JsonResult Remove(int? keyValue)
         {
             return menuService.Remove(s => s.MenuId == keyValue) ? Success("操作成功") : Error("操作失败");
+        }
+        /// <summary>
+        /// 类型下拉框
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult InitMenuType()
+        {
+            return Json(EnumHelper.ToDescriptionDictionary<AuthorizeType>().Select(s => new TreeSelectModel
+            {
+                id = s.Value,
+                text = s.Key
+            }), JsonRequestBehavior.AllowGet);
         }
     }
 }

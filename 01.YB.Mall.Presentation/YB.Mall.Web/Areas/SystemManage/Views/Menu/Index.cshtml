@@ -5,9 +5,9 @@
     $(function () {
         $.menuIndex.initGrid();
     });
-    (function($) {
+    (function ($) {
         $.menuIndex = {
-            initGrid: function() {
+            initGrid: function () {
                 $("#grid").dataGrid({
                     treeGrid: true,
                     treeGridModel: "adjacency",
@@ -23,7 +23,7 @@
                             name: 'Target',
                             width: 80,
                             align: 'center',
-                            formatter: function(cellvalue) {
+                            formatter: function (cellvalue) {
                                 if (cellvalue === "expand") {
                                     return "无页面";
                                 } else if (cellvalue === "open") {
@@ -36,20 +36,29 @@
                             }
                         },
                         {
-                            label: "菜单",
-                            name: "IsMenu",
+                            label: "类型",
+                            name: "MenuType",
                             width: 60,
-                            align: "center",
-                            formatter: function(cellvalue) {
-                                return cellvalue ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
-                            }
+                            align: "center"
+                        },
+                        {
+                            label: "元素",
+                            name: "ElementId",
+                            width: 120,
+                            align: "center"
+                        },
+                        {
+                            label: "事件",
+                            name: "Event",
+                            width: 200,
+                            align: "center"
                         },
                         {
                             label: "有效",
                             name: "IsEnabled",
                             width: 60,
                             align: "center",
-                            formatter: function(cellvalue) {
+                            formatter: function (cellvalue) {
                                 return cellvalue ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                             }
                         },
@@ -57,19 +66,19 @@
                     ]
                 });
             },
-            addMenu: function() {
+            addMenu: function () {
                 $.modalOpen({
                     id: "Form",
                     title: "新增菜单",
                     url: "/SystemManage/Menu/Form",
                     width: "700px",
                     height: "440px",
-                    callBack: function(iframeId) {
+                    callBack: function (iframeId) {
                         top.frames[iframeId].$.menuFrom.submitForm();
                     }
                 });
             },
-            editMenu: function() {
+            editMenu: function () {
                 var keyValue = $("#grid").jqGridRowValue().MenuId;
                 $.modalOpen({
                     id: "Form",
@@ -77,22 +86,22 @@
                     url: "/SystemManage/Menu/Form?keyValue=" + keyValue,
                     width: "700px",
                     height: "440px",
-                    callBack: function(iframeId) {
+                    callBack: function (iframeId) {
                         top.frames[iframeId].$.menuFrom.submitForm();
                     }
                 });
             },
-            removeMenu: function() {
+            removeMenu: function () {
                 $.deleteForm({
                     url: "/SystemManage/Menu/Remove",
                     param: { keyValue: $("#grid").jqGridRowValue().MenuId },
-                    success: function() {
+                    success: function () {
                         $.currentWindow().$("#grid").resetSelection();
                         $.currentWindow().$("#grid").trigger("reloadGrid");
                     }
                 });
             },
-            detailMenu: function() {
+            detailMenu: function () {
                 var keyValue = $("#grid").jqGridRowValue().MenuId;
                 $.modalOpen({
                     id: "Detail",
@@ -100,17 +109,6 @@
                     url: "/SystemManage/Menu/Detail?keyValue=" + keyValue,
                     width: "700px",
                     height: "490px",
-                    btn: null
-                });
-            },
-            menuButton:function() {
-                var keyValue = $("#grid").jqGridRowValue().MenuId;
-                $.modalOpen({
-                    id: "modulebutton",
-                    title: "系统按钮",
-                    url: "/SystemManage/MenuButton/Index?menuId=" + keyValue,
-                    width: "950px",
-                    height: "600px",
                     btn: null
                 });
             }
@@ -132,8 +130,6 @@
                 <li><a id="Edit" authorize="yes" onclick="$.menuIndex.editMenu()"><i class="fa fa-pencil-square-o"></i>修改菜单</a></li>
                 <li><a id="Remove" authorize="yes" onclick="$.menuIndex.removeMenu()"><i class="fa fa-trash-o"></i>删除菜单</a></li>
                 <li><a id="View" authorize="yes" onclick="$.menuIndex.detailMenu()"><i class="fa fa-search-plus"></i>查看菜单</a></li>
-                <li class="split"></li>
-                <li><a id="NF-modulebutton" authorize="yes" onclick="$.menuIndex.menuButton()"><i class="fa fa-gavel"></i>按钮管理</a></li>
             </ul>
             <a href="javascript:;" class="close"></a>
         </div>

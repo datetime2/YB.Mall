@@ -52,61 +52,45 @@
     <Compile Include="Configurations\BrandInfoConfiguration.cs" />
     <Compile Include="Configurations\CategoryInfoConfiguration.cs" />
     <Compile Include="Configurations\ManageInfoConfiguration.cs" />
-    <Compile Include="Configurations\MenuButtonInfoConfiguration.cs" />
     <Compile Include="Configurations\MenuInfoConfiguration.cs" />
     <Compile Include="Configurations\OrderInfoConfiguration.cs" />
     <Compile Include="Configurations\OrderItemInfoConfiguration.cs" />
     <Compile Include="Configurations\ProductInfoConfiguration.cs" />
     <Compile Include="Configurations\RoleInfoConfiguration.cs" />
+    <Compile Include="Configurations\RoleMenuConfigruation.cs" />
     <Compile Include="Configurations\UserInfoConfiguration.cs" />
     <Compile Include="Infrastructure\DatabaseFactory.cs" />
     <Compile Include="Infrastructure\Disposable.cs" />
     <Compile Include="Infrastructure\IDatabaseFactory.cs" />
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\201610250541451_删除菜单多余字段.cs" />
-    <Compile Include="Migrations\201610250541451_删除菜单多余字段.Designer.cs">
-      <DependentUpon>201610250541451_删除菜单多余字段.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610250549205_Location.cs" />
-    <Compile Include="Migrations\201610250549205_Location.Designer.cs">
-      <DependentUpon>201610250549205_Location.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610250837300_roleIndo-add-filed.cs" />
-    <Compile Include="Migrations\201610250837300_roleIndo-add-filed.Designer.cs">
-      <DependentUpon>201610250837300_roleIndo-add-filed.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610250959456_menubutton.cs" />
-    <Compile Include="Migrations\201610250959456_menubutton.Designer.cs">
-      <DependentUpon>201610250959456_menubutton.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610260320148_Add-role-filed.cs" />
-    <Compile Include="Migrations\201610260320148_Add-role-filed.Designer.cs">
-      <DependentUpon>201610260320148_Add-role-filed.cs</DependentUpon>
+    <Compile Include="Migrations\201610270343437_init.cs" />
+    <Compile Include="Migrations\201610270343437_init.Designer.cs">
+      <DependentUpon>201610270343437_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepository\IBrandRepository.cs" />
     <Compile Include="Repositories\IRepository\ICategoryRepository.cs" />
     <Compile Include="Repositories\IRepository\IManageRepository.cs" />
-    <Compile Include="Repositories\IRepository\IMenuButtonRepository.cs" />
     <Compile Include="Repositories\IRepository\IMenuRepository.cs" />
     <Compile Include="Repositories\IRepository\IOrderItemRepository.cs" />
     <Compile Include="Repositories\IRepository\IOrderRepository.cs" />
     <Compile Include="Repositories\IRepository\IProductRepository.cs" />
     <Compile Include="Repositories\IRepository\IRepository.cs" />
+    <Compile Include="Repositories\IRepository\IRoleMenuRepository.cs" />
     <Compile Include="Repositories\IRepository\IRoleRepository.cs" />
     <Compile Include="Repositories\IRepository\IUserRepository.cs" />
     <Compile Include="Repositories\Repository\BrandRepository.cs" />
     <Compile Include="Repositories\Repository\CategoryRepository.cs" />
     <Compile Include="Repositories\Repository\ManageRepository.cs" />
-    <Compile Include="Repositories\Repository\MenuButtonRepository.cs" />
     <Compile Include="Repositories\Repository\MenuRepository.cs" />
     <Compile Include="Repositories\Repository\OrderItemRepository.cs" />
     <Compile Include="Repositories\Repository\OrderRepository.cs" />
     <Compile Include="Repositories\Repository\ProductRepository.cs" />
     <Compile Include="Repositories\Repository\Repository.cs" />
     <Compile Include="MallContext.cs" />
+    <Compile Include="Repositories\Repository\RoleMenuRepository.cs" />
     <Compile Include="Repositories\Repository\RoleRepository.cs" />
     <Compile Include="Repositories\Repository\UserRepository.cs" />
   </ItemGroup>
@@ -125,20 +109,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610250541451_删除菜单多余字段.resx">
-      <DependentUpon>201610250541451_删除菜单多余字段.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610250549205_Location.resx">
-      <DependentUpon>201610250549205_Location.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610250837300_roleIndo-add-filed.resx">
-      <DependentUpon>201610250837300_roleIndo-add-filed.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610250959456_menubutton.resx">
-      <DependentUpon>201610250959456_menubutton.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610260320148_Add-role-filed.resx">
-      <DependentUpon>201610260320148_Add-role-filed.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201610270343437_init.resx">
+      <DependentUpon>201610270343437_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

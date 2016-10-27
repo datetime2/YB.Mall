@@ -11,7 +11,7 @@ namespace YB.Mall.Service
         List<RoleMenuViewModel> RoleMenu(int? roleId);
         jqGridPagerViewModel<RoleInfo, dynamic> RoleGrid(RoleQueryModel query);
         bool Remove(Expression<Func<RoleInfo, bool>> where);
-        bool SubmitForm(RoleInfo role, int? keyValue);
+        bool SubmitForm(RoleInfo role, IEnumerable<int> menuIds ,int? keyValue);
         RoleInfo InitForm(Expression<Func<RoleInfo, bool>> where);
         List<TreeViewModel> RoleAuthorize(int? roleId);
     }
