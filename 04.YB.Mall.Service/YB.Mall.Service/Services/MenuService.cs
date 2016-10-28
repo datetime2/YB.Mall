@@ -79,7 +79,7 @@ namespace YB.Mall.Service
                 {
                     id = items.MenuId,
                     parentId = items.ParentId,
-                    text = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + items.MenuName
+                    text = items.MenuName
                 }));
             }
             return tree;

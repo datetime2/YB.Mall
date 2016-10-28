@@ -1,7 +1,7 @@
-﻿$(function () {
+﻿$(function() {
     document.body.className = localStorage.getItem('config-skin');
     $("[data-toggle='tooltip']").tooltip();
-})
+});
 $.reload = function () {
     location.reload();
     return false;
@@ -118,7 +118,7 @@ $.modalConfirm = function (content, callBack) {
     }, function () {
         callBack(true);
     }, function () {
-        callBack(false)
+        callBack(false);
     });
 }
 $.modalAlert = function (content, type) {

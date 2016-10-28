@@ -10,14 +10,14 @@
     (function ($) {
         $.manageForm = {
             initControl: function () {
-                $("#F_Gender").bindSelect()
-                $("#F_IsAdministrator").bindSelect()
-                $("#F_EnabledMark").bindSelect()
+                $("#F_Gender").bindSelect();
+                $("#F_IsAdministrator").bindSelect();
+                $("#F_EnabledMark").bindSelect();
                 $("#F_OrganizeId").bindSelect({
                     url: "/SystemManage/Organize/GetTreeSelectJson"
                 });
                 $("#F_DepartmentId").bindSelect({
-                    url: "/SystemManage/Organize/GetTreeSelectJson",
+                    url: "/SystemManage/Organize/GetTreeSelectJson"
                 });
                 $("#F_RoleId").bindSelect({
                     url: "/SystemManage/Role/GetGridJson",
