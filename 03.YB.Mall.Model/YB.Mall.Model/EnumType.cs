@@ -46,35 +46,27 @@ namespace YB.Mall.Model
     public enum OrganizeType
     {
         /// <summary>
-        /// 研发部
+        /// 集团
         /// </summary>
-        [Description("研发部")]
-        Development,
+        [Description("集团")]
+        Group,
 
         /// <summary>
-        /// 采购部
+        /// 公司
         /// </summary>
-        [Description("采购部")]
-        Purchasing,
+        [Description("公司")]
+        Company,
 
         /// <summary>
-        /// 财务部
+        /// 部门
         /// </summary>
-        [Description("财务部")]
-        Finance,
+        [Description("部门")]
+        Department,
 
         /// <summary>
-        /// 运营部
+        /// 小组
         /// </summary>
-        [Description("运营部")]
-        Operation,
-
-        /// <summary>
-        /// 商品部
-        /// </summary>
-        [Description("商品部")]
-        Product
+        [Description("小组")]
+        WorkGroup
     }    
-
-
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using YB.Mall.Extend;
 using YB.Mall.Extend.Helper;
 using YB.Mall.Model;
 using YB.Mall.Model.QueryModel;

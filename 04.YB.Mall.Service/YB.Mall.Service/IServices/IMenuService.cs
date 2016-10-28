@@ -9,7 +9,7 @@ namespace YB.Mall.Service
 {
     public interface IMenuService
     {
-        MenuSelectModel MenuGrid(MenuQueryModel query);
+        MenuSelectModel<TreeGridModel> MenuGrid(MenuQueryModel query);
         List<TreeSelectModel> MenuTree(MenuQueryModel query);
         MenuInfo InitForm(int menuId);
         bool SubmitForm(MenuInfo menu, int? keyValue);

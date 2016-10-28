@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Configuration;
+using YB.Mall.Extend.Log;
 
 namespace YB.Mall.Core
 {
@@ -101,7 +102,7 @@ namespace YB.Mall.Core
             }
             catch (Exception exception)
             {
-                throw new Exception("注册缓存服务异常", exception);
+                Log.Error(exception);
             }
             finally
             {

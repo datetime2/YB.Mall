@@ -15,7 +15,7 @@ namespace YB.Mall.Service
         }
         public Model.ManageInfo Login(string username, string password)
         {
-            return repository.Single(s => s.ManageName.Equals(username) && s.PassWord.Equals(password));
+            return repository.Single(s => s.Account.Equals(username) && s.PassWord.Equals(password));
         }
     }
 }

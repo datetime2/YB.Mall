@@ -21,9 +21,9 @@ namespace YB.Mall.Service
             this.unitOfWork = unitOfWork;
         }
 
-        public MenuSelectModel MenuGrid(MenuQueryModel query)
+        public MenuSelectModel<TreeGridModel> MenuGrid(MenuQueryModel query)
         {
-            var select = new MenuSelectModel();
+            var select = new MenuSelectModel<TreeGridModel>();
             var predicate = PredicateBuilderUtility.True<MenuInfo>();
             if (!string.IsNullOrWhiteSpace(query.keyword))
                 predicate = predicate.And(s => s.MenuName.Contains(query.keyword));

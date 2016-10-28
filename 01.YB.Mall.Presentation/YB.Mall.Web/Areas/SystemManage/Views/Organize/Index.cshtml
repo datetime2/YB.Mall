@@ -1,0 +1,120 @@
+﻿@{
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<script>
+    $(function () {
+        $.organIndex.initGrid();
+    });
+
+    (function ($) {
+        $.organIndex = {
+            initGrid: function () {
+                $("#grid").dataGrid({
+                    treeGrid: true,
+                    treeGridModel: "adjacency",
+                    url: "/SystemManage/Organize/InitGrid",
+                    height: $(window).height() - 96,
+                    colModel: [
+                        { label: "主键", name: "OrganizeId", hidden: true, key: true },
+                        { label: '名称', name: 'OrganizeName', width: 200, align: 'left' },
+                        { label: '编号', name: 'OrganizeEnCode', width: 150, align: 'left' },
+                        {
+                            label: '分类',
+                            name: 'OrganizeType',
+                            width: 80,
+                            align: 'left'
+                        },
+                        {
+                            label: '负责人',
+                            name: 'ManagerName',
+                            width: 80,
+                            align: 'left'
+                        },
+                        {
+                            label: '电话',
+                            name: 'Phone',
+                            width: 80,
+                            align: 'left'
+                        },
+                        {
+                            label: '邮箱',
+                            name: 'Email',
+                            width: 80,
+                            align: 'left'
+                        },
+                        {
+                            label: "有效",
+                            name: "IsEnabled",
+                            width: 60,
+                            align: "center",
+                            formatter: function (cellvalue) {
+                                return cellvalue ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                            }
+                        },
+                        { label: '备注', name: 'Description', width: 300, align: 'left' }
+                    ]
+                });
+            },
+            addOrgan: function () {
+                $.modalOpen({
+                    id: "Form",
+                    title: "新增机构",
+                    url: "/SystemManage/Organize/Form",
+                    width: "700px",
+                    height: "520px",
+                    callBack: function (iframeId) {
+                        top.frames[iframeId].$.oragForm.submitForm();
+                    }
+                });
+            },
+            editOrgan: function () {
+                var keyValue = $("#grid").jqGridRowValue().OrganizeId;
+                $.modalOpen({
+                    id: "Form",
+                    title: "修改机构",
+                    url: "/SystemManage/Organize/Form?keyValue=" + keyValue,
+                    width: "700px",
+                    height: "520px",
+                    callBack: function (iframeId) {
+                        top.frames[iframeId].$.oragForm.submitForm();
+                    }
+                });
+            },
+            removeOrgan: function () {
+                $.deleteForm({
+                    url: "/SystemManage/Organize/Remove",
+                    param: { keyValue: $("#grid").jqGridRowValue().OrganizeId },
+                    success: function () {
+                        $.currentWindow().$("#grid").resetSelection();
+                        $.currentWindow().$("#grid").trigger("reloadGrid");
+                    }
+                });
+            }
+        };
+    })(jQuery);
+</script>
+
+<div class="topPanel">
+    <div class="toolbar">
+        <div class="btn-group">
+            <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
+        </div>
+        <div class="btn-group">
+            <a id="NF-add" authorize="yes" class="btn btn-primary dropdown-text" onclick="$.organIndex.addOrgan()"><i class="fa fa-plus"></i>新建机构</a>
+        </div>
+        <div class="operate">
+            <ul class="nav nav-pills">
+                <li class="first">已选中<span>1</span>项</li>
+                <li><a id="NF-edit" authorize="yes" onclick="$.organIndex.editOrgan()"><i class="fa fa-pencil-square-o"></i>修改机构</a></li>
+                <li><a id="NF-delete" authorize="yes" onclick="$.organIndex.removeOrgan()"><i class="fa fa-trash-o"></i>删除机构</a></li>
+            </ul>
+            <a href="javascript:;" class="close"></a>
+        </div>
+        <script>$('.toolbar').authorizeButton()</script>
+    </div>
+</div>
+<div class="gridPanel">
+    <table id="grid"></table>
+</div>
+
+

@@ -2,16 +2,34 @@
 
 namespace YB.Mall.Model.ViewModel
 {
-    public class MenuSelectModel
+    public class MenuSelectModel<T> where T : class
     {
-        public IEnumerable<TreeGridModel> rows { get; set; }
+        public IEnumerable<T> rows { get; set; }
     }
+
     /// <summary>
     /// 折叠列表 模型
     /// </summary>
     public class TreeGridModel : MenuViewModel
     {
         public TreeGridModel()
+        {
+            this.level = 0;
+            this.isLeaf = false;
+            this.parent = "0";
+            this.expanded = true;
+            this.loaded = true;
+        }
+        public int level { get; set; }
+        public string parent { get; set; }
+        public bool isLeaf { get; set; }
+        public bool expanded { get; set; }
+        public bool loaded { get; set; }
+    }
+
+    public class OrganizeGridModel : OrganizeViewModel
+    {
+        public OrganizeGridModel()
         {
             this.level = 0;
             this.isLeaf = false;

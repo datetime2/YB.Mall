@@ -12,8 +12,11 @@
     (function ($) {
         $.roleForm = {
             initControl: function () {
-                $("#OrganizeType").bindSelect({
-                    url: "/SystemManage/Role/InitOrganizeType"
+                $("#OrganizeId").bindSelect({
+                    url: "/SystemManage/Role/InitOrganizeType",
+                    change: function(data) {
+                        $("#OrganizeName").val(data.text);
+                    }
                 });
                 $("#RoleType").bindSelect({
                     url: "/SystemManage/Role/InitRoleType"
@@ -93,7 +96,8 @@
                             <tr>
                                 <th class="formTitle">归属组织</th>
                                 <td class="formValue">
-                                    <select id="OrganizeType" name="OrganizeType" class="form-control required"></select>
+                                    <select id="OrganizeId" name="OrganizeId" class="form-control required"></select>
+                                    <input type="hidden" id="OrganizeName" name="OrganizeName" />
                                 </td>
                             </tr>
                             <tr>
@@ -111,7 +115,7 @@
                             <tr>
                                 <th class="formTitle">显示顺序</th>
                                 <td class="formValue">
-                                    <input id="Sort" name="Sort" type="text" class="form-control required" placeholder="请输入显示顺序" />
+                                    <input id="Sort" name="Sort" type="number" class="form-control required" placeholder="请输入显示顺序" />
                                 </td>
                             </tr>
                             <tr>

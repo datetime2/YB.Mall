@@ -68,7 +68,8 @@ namespace YB.Mall.Service
                     AllowDelte = s.AllowDelte,
                     AllowEdit = s.AllowEdit,
                     RoleType = ((RoleType)s.RoleType).ToDescription(),
-                    OrganizeType = ((OrganizeType)s.OrganizeType).ToDescription(),
+                    OrganizeId = s.OrganizeId,
+                    OrganizeName=s.OrganizeName,
                     IsEnabled = s.IsEnabled,
                     Remark = s.Remark,
                     CreateTime = s.CreateTime

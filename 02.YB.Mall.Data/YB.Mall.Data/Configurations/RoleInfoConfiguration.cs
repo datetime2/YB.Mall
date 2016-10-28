@@ -16,7 +16,7 @@ namespace YB.Mall.Data.Configurations
             this.Property(s => s.AllowDelte).IsRequired();
             this.Property(s => s.AllowEdit).IsRequired();
             this.Property(s => s.RoleType).IsRequired();
-            this.Property(s => s.OrganizeType).IsRequired();
+            this.Property(s => s.OrganizeId);
             this.Property(s => s.Sort).IsRequired();
             this.Property(s => s.Remark).HasMaxLength(200);
             this.ToTable("T_RoleInfo");

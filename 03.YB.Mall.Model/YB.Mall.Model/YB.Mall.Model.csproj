@@ -42,6 +42,7 @@
     <Compile Include="CacheKeyCollection.cs" />
     <Compile Include="EnumType.cs" />
     <Compile Include="Manager\ManageInfo.cs" />
+    <Compile Include="Manager\ManageRole.cs" />
     <Compile Include="Manager\RoleInfo.cs" />
     <Compile Include="Order\OrderInfo.cs" />
     <Compile Include="Order\OrderItemInfo.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="QueryModel\PagerQueryModel.cs" />
     <Compile Include="QueryModel\RoleQueryModel.cs" />
     <Compile Include="System\MenuInfo.cs" />
+    <Compile Include="System\Organize.cs" />
     <Compile Include="System\RoleMenu.cs" />
     <Compile Include="User\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

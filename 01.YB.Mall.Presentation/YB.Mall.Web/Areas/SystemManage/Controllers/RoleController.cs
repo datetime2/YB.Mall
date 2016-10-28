@@ -14,9 +14,11 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
     public class RoleController : BaseController
     {
         private readonly IRoleService roleService;
-        public RoleController(IRoleService _roleService)
+        private readonly IOrganizeService oragService;
+        public RoleController(IRoleService _roleService, IOrganizeService _oragService)
         {
             this.roleService = _roleService;
+            this.oragService = _oragService;
         }
         /// <summary>
         /// 列表加载
@@ -28,11 +30,6 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         {
             var grid = roleService.RoleGrid(query);
             return Json(grid, JsonRequestBehavior.AllowGet);
-        }
-        [HttpGet]
-        public JsonResult InitTree(MenuQueryModel query)
-        {
-            return Json(null, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -48,11 +45,13 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
             {
                 RoleName = role.RoleName,
                 RoleType = role.RoleType,
-                OrganizeType = role.OrganizeType,
+                OrganizeId = role.OrganizeId,
+                OrganizeName = role.OrganizeName,
                 IsEnabled = role.IsEnabled,
                 AllowDelte = role.AllowDelte,
                 AllowEdit = role.AllowEdit,
-                Remark = role.Remark
+                Remark = role.Remark,
+                Sort = role.Sort
             }, JsonRequestBehavior.AllowGet);
         }
 
@@ -74,13 +73,9 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public JsonResult InitOrganizeType()
+        public JsonResult InitOrganizeType(MenuQueryModel query)
         {
-            return Json(EnumHelper.ToDescriptionDictionary<OrganizeType>().Select(s => new TreeSelectModel
-            {
-                id = s.Value,
-                text = s.Key
-            }), JsonRequestBehavior.AllowGet);
+            return Json(oragService.OrganizeTree(query), JsonRequestBehavior.AllowGet);
         }
         /// <summary>
         /// 角色权限树
@@ -97,9 +92,9 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult SubmitForm(RoleInfo role,string permissionIds,int?keyValue)
+        public JsonResult SubmitForm(RoleInfo role, string permissionIds, int? keyValue)
         {
-            return roleService.SubmitForm(role,permissionIds.Split(',').Select(int.Parse), keyValue) ? Success("操作成功") : Error("操作失败");
+            return roleService.SubmitForm(role, permissionIds.Split(',').Select(int.Parse), keyValue) ? Success("操作成功") : Error("操作失败");
         }
     }
 }
