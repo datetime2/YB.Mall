@@ -69,7 +69,7 @@ namespace YB.Mall.Service
                     AllowEdit = s.AllowEdit,
                     RoleType = ((RoleType)s.RoleType).ToDescription(),
                     OrganizeId = s.OrganizeId,
-                    OrganizeName=s.OrganizeName,
+                    OrganizeName = s.OrganizeName,
                     IsEnabled = s.IsEnabled,
                     Remark = s.Remark,
                     CreateTime = s.CreateTime
@@ -164,6 +164,16 @@ namespace YB.Mall.Service
                     }).ToList()
                 };
             }).ToList();
+        }
+
+
+        public IEnumerable<TreeSelectModel> RoleSelect(Expression<Func<RoleInfo, bool>> where)
+        {
+            return repository.GetMany(where).Select(s => new TreeSelectModel
+            {
+                id = s.RoleId,
+                text = s.RoleName
+            });
         }
     }
 }

@@ -335,6 +335,8 @@ $.fn.formSerialize = function (formdate) {
         var id = $this.attr('id');
         var type = $this.attr('type');
         switch (type) {
+            case undefined:
+                break;
             case "checkbox":
                 postdata[id] = $this.is(":checked");
                 break;
@@ -347,9 +349,9 @@ $.fn.formSerialize = function (formdate) {
                 break;
         }
     });
-    if ($('[name=__RequestVerificationToken]').length > 0) {
-        postdata["__RequestVerificationToken"] = $('[name=__RequestVerificationToken]').val();
-    }
+    //if ($('[name=__RequestVerificationToken]').length > 0) {
+    //    postdata["__RequestVerificationToken"] = $('[name=__RequestVerificationToken]').val();
+    //}
     return postdata;
 };
 $.fn.bindSelect = function (options) {
@@ -359,7 +361,9 @@ $.fn.bindSelect = function (options) {
         search: false,
         url: "",
         param: [],
-        change: null
+        change: null,
+        tags: false,
+        maxselectlength: 3
     };
     var options = $.extend(defaults, options);
     var $element = $(this);
@@ -374,7 +378,9 @@ $.fn.bindSelect = function (options) {
                     $element.append($("<option></option>").val(data[i][options.id]).html(data[i][options.text]));
                 });
                 $element.select2({
-                    minimumResultsForSearch: options.search == true ? 0 : -1
+                    minimumResultsForSearch: options.search ? 0 : -1,
+                    tags: options.tags,
+                    maximumSelectionLength: options.maxselectlength
                 });
                 $element.on("change", function (e) {
                     if (options.change != null) {

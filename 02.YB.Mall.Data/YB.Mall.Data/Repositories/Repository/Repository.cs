@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Utilities;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -13,12 +15,15 @@ using EntityFramework.Extensions;
 using YB.Mall.Model.QueryModel;
 using YB.Mall.Model.ViewModel;
 using YB.Mall.Extend.Linq;
+using System.Data.Entity.Utilities;
+
 namespace YB.Mall.Data.Repositories
 {
     public abstract class Repository<T> where T : class, new()
     {
         private MallContext _dataContext;
         private readonly DbSet<T> _dbset;
+
         protected Repository(IDatabaseFactory databaseFactory)
         {
             DatabaseFactory = databaseFactory;
@@ -52,7 +57,7 @@ namespace YB.Mall.Data.Repositories
             _dbset.Attach(entity);
             _dataContext.Entry(entity).State = EntityState.Modified;
         }
-        
+
         public virtual bool Update(Expression<Func<T, bool>> where, Expression<Func<T, T>> filed)
         {
             return _dbset.Where(where).Update(filed) > 0;
@@ -75,7 +80,7 @@ namespace YB.Mall.Data.Repositories
         }
         public virtual IEnumerable<T> GetAll()
         {
-            return _dbset.ToList();
+            return _dbset;
         }
         public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where)
         {
@@ -95,7 +100,7 @@ namespace YB.Mall.Data.Repositories
         /// <param name="sort">排序</param>
         /// <param name="desc">倒序</param>
         /// <returns></returns>
-        public virtual jqGridPagerViewModel<T,dynamic> Pager<TKey>(Expression<Func<T, bool>> where, int page,
+        public virtual jqGridPagerViewModel<T, dynamic> Pager<TKey>(Expression<Func<T, bool>> where, int page,
             int size, Expression<Func<T, TKey>> sort = null, bool desc = true)
         {
             var entities = _dbset.Where(where);
@@ -105,10 +110,10 @@ namespace YB.Mall.Data.Repositories
                 page = page,
                 size = size,
                 rows = sort == null
-                    ? entities.Skip((page - 1)*size).Take(size)
+                    ? entities.Skip((page - 1) * size).Take(size)
                     : (!desc
-                        ? entities.OrderBy(sort).Skip((page - 1)*size).Take(size)
-                        : entities.OrderByDescending(sort).Skip((page - 1)*size).Take(size))
+                        ? entities.OrderBy(sort).Skip((page - 1) * size).Take(size)
+                        : entities.OrderByDescending(sort).Skip((page - 1) * size).Take(size))
             };
         }
         /// <summary>
@@ -126,13 +131,13 @@ namespace YB.Mall.Data.Repositories
                 page = query.page.Value,
                 size = query.rows,
                 rows = string.IsNullOrEmpty(query.sidx)
-                    ? entities.Skip((query.page.Value - 1)*query.rows.Value).Take(query.rows.Value)
+                    ? entities.Skip((query.page.Value - 1) * query.rows.Value).Take(query.rows.Value)
                     : (query.sord == "asc"
                         ? entities.OrderBy(query.sidx)
-                            .Skip((query.page.Value - 1)*query.rows.Value)
+                            .Skip((query.page.Value - 1) * query.rows.Value)
                             .Take(query.rows.Value)
                         : entities.OrderBy(query.sidx, true)
-                            .Skip((query.page.Value - 1)*query.rows.Value)
+                            .Skip((query.page.Value - 1) * query.rows.Value)
                             .Take(query.rows.Value))
             };
         }

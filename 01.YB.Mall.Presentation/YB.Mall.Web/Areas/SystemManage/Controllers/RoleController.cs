@@ -96,5 +96,11 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         {
             return roleService.SubmitForm(role, permissionIds.Split(',').Select(int.Parse), keyValue) ? Success("操作成功") : Error("操作失败");
         }
+
+        [HttpGet]
+        public JsonResult SelectRole()
+        {
+            return Json(roleService.RoleSelect(s=>s.IsEnabled), JsonRequestBehavior.AllowGet);
+        }
     }
 }

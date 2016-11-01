@@ -6,7 +6,7 @@ namespace YB.Mall.Model
     {
         public ManageInfo()
         {
-            this.ManageRole = new HashSet<ManageRole>();
+            this.ManageRole=new HashSet<ManageRole>();
         }
         public int ManageId { get; set; }
         public string Account { get; set; }

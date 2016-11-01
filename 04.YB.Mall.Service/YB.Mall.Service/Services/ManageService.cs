@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using YB.Mall.Data.Infrastructure;
 using YB.Mall.Data.Repositories;
 using YB.Mall.Extend.Helper;
@@ -10,17 +12,26 @@ namespace YB.Mall.Service
 {
     public class ManageService : IManageService
     {
-        private IManageRepository repository;
+        private readonly IManageRepository repository;
+        private readonly IManageRoleRepository mrepository;
         private IUnitOfWork unitOfWork;
 
-        public ManageService(IManageRepository repository, IUnitOfWork unitOfWork)
+        public ManageService(IManageRepository repository,
+            IManageRoleRepository mrepository,
+            IUnitOfWork unitOfWork)
         {
             this.repository = repository;
+            this.mrepository = mrepository;
             this.unitOfWork = unitOfWork;
         }
-        public Model.ManageInfo Login(string username, string password)
+        public bool Login(string username, string password)
         {
-            return repository.Single(s => s.Account.Equals(username) && s.PassWord.Equals(password));
+            var flag = false;
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password)) return false;
+            var mang=  repository.Single(s => s.Account.Equals(username));
+            if (mang != null && mang.PassWord.Equals(SecureHelper.Md5(SecureHelper.Md5(password) + mang.PassPlat)))
+                flag = true;
+            return flag;
         }
         public Model.ViewModel.jqGridPagerViewModel<Model.ManageInfo, dynamic> InitGrid(Model.QueryModel.ManageQueryModel query)
         {
@@ -40,7 +51,8 @@ namespace YB.Mall.Service
                     Email = s.Email,
                     Description = s.Description,
                     IsEnabled = s.IsEnabled,
-                    Gender = s.Gender
+                    Gender = s.Gender,
+                    Role = "超级管理员,仓库管理员"
                 }),
                 size = grid.size,
                 page = grid.page,
@@ -48,22 +60,43 @@ namespace YB.Mall.Service
             };
         }
 
-        public bool SubmitForm(ManageInfo mang, int? keyValue)
+        public bool SubmitForm(ManageInfo mang, IEnumerable<int> roles, int? keyValue)
         {
             var flag = false;
+            var enumerable = roles as int[] ?? roles.ToArray();
             if (keyValue.HasValue)
             {
+                if (enumerable.Any())
+                    mrepository.Delete(s => s.ManageId == keyValue);
                 mang.ManageId = keyValue.Value;
                 repository.Update(mang);
+                flag = mrepository.Add(enumerable.Select(s => new ManageRole
+                {
+                    ManageId = keyValue.Value,
+                    RoleId = s
+                })).Any();
                 unitOfWork.SaveChanges();
             }
             else
             {
+                var salt = Guid.NewGuid().ToString();
+                mang.PassPlat = salt;
+                mang.PassWord = SecureHelper.Md5(SecureHelper.Md5(mang.PassWord) + salt);
                 repository.Add(mang);
+                unitOfWork.SaveChanges();
+                mrepository.Add(enumerable.Select(s => new ManageRole
+                {
+                    ManageId = mang.ManageId,
+                    RoleId = s
+                }));
                 unitOfWork.SaveChanges();
                 flag = mang.ManageId > 0;
             }
             return flag;
+        }
+        public ManageInfo InitForm(int manageId)
+        {
+            return repository.Single(s => s.ManageId == manageId);
         }
     }
 }

@@ -61,6 +61,8 @@
             },
             submitForm: function () {
                 var postData = $("#form1").formSerialize();
+                if (!postData)
+                    return false;
                 postData["permissionIds"] = String($("#permissionTree").getCheckedNodes());
                 $.submitForm({
                     url: "/SystemManage/Role/SubmitForm?keyValue=" + keyValue,

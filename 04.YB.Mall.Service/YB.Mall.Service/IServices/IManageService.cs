@@ -7,8 +7,9 @@ namespace YB.Mall.Service
 {
     public interface IManageService
     {
-        ManageInfo Login(string username, string password);
+        bool Login(string username, string password);
         jqGridPagerViewModel<ManageInfo, dynamic> InitGrid(ManageQueryModel query);
-        bool SubmitForm(ManageInfo mang, int? keyValue);
+        bool SubmitForm(ManageInfo mang, IEnumerable<int> roles, int? keyValue);
+        ManageInfo InitForm(int manageId);
     }
 }

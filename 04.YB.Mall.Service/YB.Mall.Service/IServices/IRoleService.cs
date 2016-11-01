@@ -14,5 +14,6 @@ namespace YB.Mall.Service
         bool SubmitForm(RoleInfo role, IEnumerable<int> menuIds ,int? keyValue);
         RoleInfo InitForm(Expression<Func<RoleInfo, bool>> where);
         List<TreeViewModel> RoleAuthorize(int? roleId);
+        IEnumerable<TreeSelectModel> RoleSelect(Expression<Func<RoleInfo, bool>> where);
     }
 }

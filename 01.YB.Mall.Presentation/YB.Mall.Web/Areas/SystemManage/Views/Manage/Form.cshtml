@@ -1,62 +1,62 @@
 ﻿@{
     Layout = "~/Views/Shared/_Form.cshtml";
 }
-
-<script>
-    var keyValue = $.request("keyValue");
-    $(function () {
-        $.manageForm.initControl();
-    });
-    (function ($) {
-        $.manageForm = {
-            initControl: function () {
-                $("#F_Gender").bindSelect();
-                $("#F_IsAdministrator").bindSelect();
-                $("#F_EnabledMark").bindSelect();
-                $("#F_OrganizeId").bindSelect({
-                    url: "/SystemManage/Organize/GetTreeSelectJson"
-                });
-                $("#F_DepartmentId").bindSelect({
-                    url: "/SystemManage/Organize/GetTreeSelectJson"
-                });
-                $("#F_RoleId").bindSelect({
-                    url: "/SystemManage/Role/GetGridJson",
-                    id: "F_Id",
-                    text: "F_FullName"
-                });
-                $("#F_DutyId").bindSelect({
-                    url: "/SystemManage/Duty/GetGridJson",
-                    id: "F_Id",
-                    text: "F_FullName"
-                });
-                if (!!keyValue) {
-                    $.ajax({
-                        url: "/SystemManage/User/GetFormJson",
-                        data: { keyValue: keyValue },
-                        dataType: "json",
-                        async: false,
-                        success: function (data) {
-                            $("#form1").formSerialize(data);
-                            $("#F_UserPassword").val("******").attr('disabled', 'disabled');
+@section scripts
+{
+    <script type="text/javascript">
+        var keyValue = $.request("keyValue");
+        $(function () {
+            $.manageForm.initControl();
+        });
+        (function ($) {
+            $.manageForm = {
+                initControl: function () {
+                    $("#Gender").bindSelect();
+                    $("#RoleId").bindSelect({
+                        url: "/SystemManage/Role/SelectRole",
+                        id: "id",
+                        text: "text",
+                        tags: true,
+                        maxselectlength: 10
+                    });
+                    if (!!keyValue) {
+                        $.ajax({
+                            url: "/SystemManage/Manage/InitForm",
+                            data: { keyValue: keyValue },
+                            dataType: "json",
+                            async: false,
+                            success: function(data) {
+                                $("#form1").formSerialize(data);
+                                $("#PassWord").val("******").attr('disabled', 'disabled');
+                                $('#RoleId').val(data.Role).trigger("change");
+                            }
+                        });
+                    }
+                },
+                submitForm: function () {
+                    if (!$('#form1').formValid())
+                        return false;
+                    var postData = $("#form1").formSerialize();
+                    console.log(postData);
+                    var arry = [];
+                    var reslist = $("#RoleId").select2("data");
+                    $.each(reslist, function (i, v) {
+                        arry.push(v.id);
+                    });
+                    postData["roles"] = String(arry);
+                    $.submitForm({
+                        url: "/SystemManage/Manage/SubmitForm?keyValue=" + keyValue,
+                        param: postData,
+                        success: function () {
+                            $.currentWindow().$("#grid").trigger("reloadGrid");
                         }
                     });
                 }
-            },
-            submitForm: function () {
-                if (!$('#form1').formValid()) {
-                    return false;
-                }
-                $.submitForm({
-                    url: "/SystemManage/User/SubmitForm?keyValue=" + keyValue,
-                    param: $("#form1").formSerialize(),
-                    success: function () {
-                        $.currentWindow().$("#gridList").trigger("reloadGrid");
-                    }
-                });
-            }
-        };
-    })(jQuery);
-</script>
+            };
+        })(jQuery);
+    </script>
+}
+
 <form id="form1">
     <div style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
         <ul class="nav nav-tabs">
@@ -68,7 +68,7 @@
                 <tr>
                     <th class="formTitle">账户</th>
                     <td class="formValue">
-                        <input id="Account" name="Account" type="text" class="form-control required" placeholder="请输入账户" />
+                        <input id="Account" name="Account" type="text" class="form-control required" placeholder="请输入账户"/>
                     </td>
                     <th class="formTitle">密码</th>
                     <td class="formValue">
@@ -77,22 +77,14 @@
                 </tr>
                 <tr>
                     <th class="formTitle">角色</th>
-                    <td class="formValue">
-                        <select id="F_RoleId" name="F_RoleId" class="form-control required">
-                            <option value="">==请选择==</option>
-                        </select>
-                    </td>
-                    <th class="formTitle">姓名</th>
-                    <td class="formValue">
-                        <input id="RealName" name="RealName" type="text" class="form-control required" placeholder="请输入姓名" />
+                    <td class="formValue" colspan="3">
+                        <select id="RoleId" name="RoleId" class="form-control select2 required" multiple="multiple"></select>
                     </td>
                 </tr>
                 <tr>
-                    <th class="formTitle">部门</th>
+                    <th class="formTitle">姓名</th>
                     <td class="formValue">
-                        <select id="F_DepartmentId" name="F_DepartmentId" class="form-control required">
-                            <option value="">==请选择==</option>
-                        </select>
+                        <input id="RealName" name="RealName" type="text" class="form-control required" placeholder="请输入姓名" />
                     </td>
                     <th class="formTitle">性别</th>
                     <td class="formValue">
@@ -118,11 +110,10 @@
                         <input id="Email" name="Email" type="text" class="form-control" />
                     </td>
                     <th class="formTitle">允许登录</th>
-                    <td class="formValue">
-                        <select id="F_EnabledMark" name="F_EnabledMark" class="form-control">
-                            <option value="true">是</option>
-                            <option value="false">否</option>
-                        </select>
+                    <td class="formValue" style="padding-top: 1px;">
+                        <div class="ckbox">
+                            <input id="IsEnabled" name="IsEnabled" type="checkbox" checked="checked"><label for="IsEnabled">允许</label>
+                        </div>
                     </td>
                 </tr>
                 <tr>

@@ -1,5 +1,63 @@
-﻿@{
-    Layout = "~/Views/Shared/_Form.cshtml";
-}
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="~/Content/js/jquery/jquery-2.1.1.min.js"></script>
+    <script src="~/Content/js/bootstrap/bootstrap.js"></script>
+    <link href="~/Content/js/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/js/select2/select2.min.css" rel="stylesheet" />
+    <script src="~/Content/js/select2/select2.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var ids = [5,7];
+            $.manageForm.initControl();
+            $(".js-programmatic-multi-set-val").on("click",function() {
+                //$("#RoleId").select2().val(1).trigger("change");
+                $('#RoleId').val(ids).trigger("change");
+            });
+        });
+        (function ($) {
+            $.manageForm = {
+                initControl: function () {
+                    //$("#RoleId").bindSelect({
+                    //    url: "/SystemManage/Role/SelectRole",
+                    //    id: "Id",
+                    //    text: "RoleName",
+                    //    tags: true,
+                    //    maxselectlength: 10
+                    //});
 
+                    BindSelect('RoleId', '/SystemManage/Role/SelectRole');
 
+                    //$(".js-example-programmatic-multi").select2();
+                }
+            };
+        })(jQuery);
+
+        function BindSelect(ctrlName, url) {
+            var control = $('#' + ctrlName);
+            //设置Select2的处理
+            control.select2({
+                allowClear: true,
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
+            //绑定Ajax的内容
+            $.getJSON(url, function (data) {
+                control.empty();//清空下拉框
+                $.each(data, function (i, item) {
+                    control.append("<option value='" + item.id + "'>&nbsp;" + item.text + "</option>");
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+    <select id="RoleId" class="js-example-programmatic-multi js-states form-control" multiple="multiple"></select>
+    <button type="button" class="js-programmatic-multi-set-val btn btn-default">
+        Set to California and Alabama
+    </button>
+</body>
+</html>

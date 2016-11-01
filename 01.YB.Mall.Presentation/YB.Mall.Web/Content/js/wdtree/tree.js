@@ -515,7 +515,7 @@
             if (_src == 'checkbox_1.png' || _src == 'checkbox_2.png') {
                 var _value = $(this).attr('id').substring(parseInt(_length)).replace(/_/g, "-");
                 _value = _value.substring(0, _value.length - 3);
-                value.push(_value)
+                value.push(_value);
             }
         });
         return value;
