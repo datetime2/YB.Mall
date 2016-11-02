@@ -11,6 +11,7 @@ using YB.Mall.Service;
 using YB.Mall.Web.Controllers;
 namespace YB.Mall.Web.Areas.SystemManage.Controllers
 {
+    [HandlerLogin]
     public class RoleController : BaseController
     {
         private readonly IRoleService roleService;
@@ -26,6 +27,7 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         /// <param name="query"></param>
         /// <returns></returns>
         [HttpGet]
+        [HandlerAjaxOnly]
         public JsonResult RoleGrid(RoleQueryModel query)
         {
             var grid = roleService.RoleGrid(query);
@@ -38,6 +40,7 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         /// <param name="keyValue"></param>
         /// <returns></returns>
         [HttpGet]
+        [HandlerAjaxOnly]
         public JsonResult InitForm(int? keyValue)
         {
             var role = roleService.InitForm(s => s.RoleId == keyValue);
@@ -60,6 +63,7 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [HandlerAjaxOnly]
         public JsonResult InitRoleType()
         {
             return Json(EnumHelper.ToDescriptionDictionary<RoleType>().Select(s => new TreeSelectModel
@@ -73,6 +77,7 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [HandlerAjaxOnly]
         public JsonResult InitOrganizeType(MenuQueryModel query)
         {
             return Json(oragService.OrganizeTree(query), JsonRequestBehavior.AllowGet);
@@ -83,6 +88,7 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         /// <param name="roleId"></param>
         /// <returns></returns>
         [HttpGet]
+        [HandlerAjaxOnly]
         public JsonResult RoleAuthorize(int? roleId)
         {
             return Json(roleService.RoleAuthorize(roleId), JsonRequestBehavior.AllowGet);
@@ -92,12 +98,14 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [HandlerAjaxOnly]
         public JsonResult SubmitForm(RoleInfo role, string permissionIds, int? keyValue)
         {
             return roleService.SubmitForm(role, permissionIds.Split(',').Select(int.Parse), keyValue) ? Success("操作成功") : Error("操作失败");
         }
 
         [HttpGet]
+        [HandlerAjaxOnly]
         public JsonResult SelectRole()
         {
             return Json(roleService.RoleSelect(s=>s.IsEnabled), JsonRequestBehavior.AllowGet);

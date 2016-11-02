@@ -24,13 +24,13 @@ namespace YB.Mall.Service
             this.mrepository = mrepository;
             this.unitOfWork = unitOfWork;
         }
-        public bool Login(string username, string password)
+        public ManageInfo Login(string username, string password)
         {
-            var flag = false;
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password)) return false;
-            var mang=  repository.Single(s => s.Account.Equals(username));
-            if (mang != null && mang.PassWord.Equals(SecureHelper.Md5(SecureHelper.Md5(password) + mang.PassPlat)))
-                flag = true;
+            var flag = new ManageInfo();
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password)) return null;
+            var mang = repository.Single(s => s.Account.Equals(username));
+            if (mang != null && mang.PassWord.Equals(SecureHelper.Md5(password + mang.PassPlat)))
+                flag = mang;
             return flag;
         }
         public Model.ViewModel.jqGridPagerViewModel<Model.ManageInfo, dynamic> InitGrid(Model.QueryModel.ManageQueryModel query)
@@ -66,16 +66,27 @@ namespace YB.Mall.Service
             var enumerable = roles as int[] ?? roles.ToArray();
             if (keyValue.HasValue)
             {
-                if (enumerable.Any())
-                    mrepository.Delete(s => s.ManageId == keyValue);
-                mang.ManageId = keyValue.Value;
-                repository.Update(mang);
-                flag = mrepository.Add(enumerable.Select(s => new ManageRole
+                if (repository.Update(s => s.ManageId == keyValue.Value, u => new ManageInfo
                 {
-                    ManageId = keyValue.Value,
-                    RoleId = s
-                })).Any();
-                unitOfWork.SaveChanges();
+                    Account = mang.Account,
+                    RealName = mang.RealName,
+                    Phone = u.Phone,
+                    Birthday = u.Birthday,
+                    Email = u.Email,
+                    Description = u.Description,
+                    IsEnabled = u.IsEnabled,
+                    Gender = u.Gender
+                }))
+                {
+                    if (enumerable.Any())
+                        mrepository.Delete(s => s.ManageId == keyValue);
+                    flag = mrepository.Add(enumerable.Select(s => new ManageRole
+                    {
+                        ManageId = keyValue.Value,
+                        RoleId = s
+                    })).Any();
+                    unitOfWork.SaveChanges();
+                }
             }
             else
             {
@@ -94,6 +105,7 @@ namespace YB.Mall.Service
             }
             return flag;
         }
+
         public ManageInfo InitForm(int manageId)
         {
             return repository.Single(s => s.ManageId == manageId);

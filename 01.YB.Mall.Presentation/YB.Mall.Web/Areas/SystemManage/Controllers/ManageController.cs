@@ -10,6 +10,7 @@ using YB.Mall.Web.Controllers;
 
 namespace YB.Mall.Web.Areas.SystemManage.Controllers
 {
+    [HandlerLogin]
     public class ManageController : BaseController
     {
         private readonly IManageService mangService;
@@ -21,11 +22,13 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
             this.roleService = _roleService;
         }
         [HttpGet]
+        [HandlerAjaxOnly]
         public JsonResult InitGrid(ManageQueryModel query)
         {
             return Json(mangService.InitGrid(query), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        [HandlerAjaxOnly]
         public JsonResult SubmitForm(ManageInfo mang, string roles, int? keyValue)
         {
             return mangService.SubmitForm(mang, roles.Split(',').Select(int.Parse), keyValue)
@@ -34,6 +37,7 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         }
 
         [HttpGet]
+        [HandlerAjaxOnly]
         public JsonResult InitForm(int keyValue)
         {
             var mang = mangService.InitForm(keyValue);

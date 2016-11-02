@@ -12,6 +12,7 @@ using YB.Mall.Web.Controllers;
 
 namespace YB.Mall.Web.Areas.SystemManage.Controllers
 {
+    [HandlerLogin]
     public class MenuController : BaseController
     {
         private readonly IMenuService menuService;
@@ -20,17 +21,20 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
             this.menuService = _menuService;
         }
         [HttpGet]
+        [HandlerAjaxOnly]
         public JsonResult InitGrid(MenuQueryModel query)
         {
             return Json(menuService.MenuGrid(query), JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
+        [HandlerAjaxOnly]
         public JsonResult InitTree(MenuQueryModel query)
         {
             return Json(menuService.MenuTree(query), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
+        [HandlerAjaxOnly]
         public JsonResult InitForm(int keyValue)
         {
             var menu = menuService.InitForm(keyValue);
@@ -51,12 +55,14 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         }
 
         [HttpPost]
+        [HandlerAjaxOnly]
         public JsonResult SubmitForm(MenuInfo menu, int? keyValue)
         {
             return menuService.SubmitForm(menu, keyValue) ? Success("操作成功") : Error("操作失败");
         }
 
         [HttpPost]
+        [HandlerAjaxOnly]
         public JsonResult Remove(int? keyValue)
         {
             return menuService.Remove(s => s.MenuId == keyValue) ? Success("操作成功") : Error("操作失败");
@@ -66,6 +72,7 @@ namespace YB.Mall.Web.Areas.SystemManage.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [HandlerAjaxOnly]
         public JsonResult InitMenuType()
         {
             return Json(EnumHelper.ToDescriptionDictionary<AuthorizeType>().Select(s => new TreeSelectModel
